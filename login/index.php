@@ -11,7 +11,7 @@ $user_data = check_login($con);
 <html lang="el">
 <head>
     <link rel="stylesheet" href="styles.css">
-   <title>My volunteer Platform</title>
+   <title>My volunteer platform</title>
 </head>
 <body>
 
