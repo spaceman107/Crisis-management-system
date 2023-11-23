@@ -1,7 +1,7 @@
 # Crisis-management-system
 
 #TODO
-Login ✅ <br/><br/>
+Login ✅ 
 Landing page for ADMIN <br/><br/>
 Landing page for RESCUER <br/><br/>
 Landing page for USER <br/><br/>
