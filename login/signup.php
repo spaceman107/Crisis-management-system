@@ -41,9 +41,17 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 <head1><h2>SIGN UP</h2></head1>
     <form method="post">                                      <!--form-->
         <label for="user_name">Username:</label><br>
-        <input type="text" id="user_name" name="user_name"><br>
+        <input type="text" id="user_name" name="user_name" required><br>
         <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br><br>
+        <input type="password" id="password" name="password" required><br>
+        <label for="first_name">First Name:</label><br>
+        <input type="text" id="first_name" name="first_name" required><br>
+        <label for="last_name">Last Name:</label><br>
+        <input type="text" id="last_name" name="last_name" required><br>
+        <label for="phone">Phone:</label><br>
+        <input type="text" id="phone" name="phone" required><br>
+        <label for="location_id">Location ID:</label><br>
+        <input type="text" id="location_id" name="location_id" required><br><br>
         <input type="submit" value="Signup" name="submit"><br><br>
      <a href="Login.php">Click to login</a><br><br>  
     </form>
