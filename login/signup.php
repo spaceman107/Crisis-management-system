@@ -8,13 +8,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     //something was posted
     $user_name = $_POST['user_name'];
     $password = $_POST['password'];
-    
-    if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
-    {
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $phone = $_POST['phone'];
+    $location_id = $_POST['location_id'];
 
-        //save to database
-       
-        $query = "insert into login_info (username,password,user_type) values ('$user_name','$password','User')";
+    if (
+        !empty($user_name) && !empty($password) && !is_numeric($user_name)
+        && !empty($first_name) && !empty($last_name) && !empty($phone) && !empty($location_id)
+    ) {
+
+        // save to database
+
+        $query = "INSERT INTO login_info (username, password, user_type, first_name, last_name, phone, location_id) 
+        VALUES ('$user_name', '$password', 'User', '$first_name', '$last_name', '$phone', '$location_id')";
 
         mysqli_query($con, $query);
 
