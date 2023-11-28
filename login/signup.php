@@ -17,21 +17,24 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 
     if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
     {
-        //save to database
-       
-        $query = "INSERT INTO user (username, password, user_type, first_name, last_name, phone) 
-        VALUES ('$user_name', '$password', 'User', '$first_name', '$last_name', '$phone')";
-        if (mysqli_query($con, $query)) {
-            // Insert into location table
-            $coordinatesQuery = "INSERT INTO location (x_coordinate, y_coordinate) VALUES ('$latitude', '$longitude')";
-
-            if (mysqli_query($con, $coordinatesQuery)) {
+         //Insert into location table
+        $coordinatesQuery = "INSERT INTO location (x_coordinate, y_coordinate) VALUES ('$latitude', '$longitude')";
+        
+        if (mysqli_query($con, $coordinatesQuery)) {
+            $location_id = mysqli_insert_Id($con);
+            //save to database
+           $query = "INSERT INTO user (username, password, user_type, first_name, last_name, phone,location_id) 
+            VALUES ('$user_name', '$password', 'User', '$first_name', '$last_name', '$phone','$location_id')";
+            
+            if (mysqli_query($con, $query)) {
                 header("Location: Login.php");
                 die;
-            } else {
+            } else 
+            {
                 echo "Error inserting into location table: " . mysqli_error($con);
             }
-        } else {
+        } else 
+        {
             echo "Error inserting into login_info/user table: " . mysqli_error($con);
         }
     } else {
@@ -118,4 +121,3 @@ map.on('click', onMapClick);
 
 
 </html>
-
