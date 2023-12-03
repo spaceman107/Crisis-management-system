@@ -22,6 +22,12 @@
             padding: 10px;
         }
 
+        section {
+            position: relative;
+            flex: 1;
+            padding: 20px;
+        }
+
         .logout-btn {
             position: absolute;
             top: 30px;
@@ -42,11 +48,10 @@
             display: flex;
             min-height: 100%;
         }
-        
+
         .wrapper.collapsed nav {
             width: 0;
-        }        
-
+        }
 
         nav {
             width: 250px;
@@ -57,8 +62,6 @@
             transition: width 0.3s;
             overflow: hidden;
         }
-
-
 
         nav ul {
             list-style-type: none;
@@ -99,7 +102,7 @@
             margin-left: 20px;
         }
 
-        button {
+        .toggleButton {
             position: absolute;
             top: 4px;
             left: 10px;
@@ -111,13 +114,69 @@
             cursor: pointer;
             font-size: 50px;
         }
+
+
+
+        section#create-announcement {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-top: 10px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        textarea,
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .announcement-submit-button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .announcement-submit-button:hover {
+            background-color: #45a049;
+        }
+    
+
+        
     </style>
+
 </head>
 <body>
 
 <header>
     <h2>Admin Dashboard</h2>
-    <button id="toggleButton">&#9776;</button>
+    <button class="toggleButton", id="toggleButton">&#9776;</button>
     <a class="logout-btn" href="#">Logout</a>
 </header>
 
@@ -162,6 +221,18 @@
 
     <section id="create-announcement">
         <h2>Create Announcement</h2>
+
+        <form>
+            <label for="announcementText">Announcement Text:</label>
+            <textarea id="announcementText" name="announcementText" rows="4" cols="50"></textarea>
+
+            <label for="announcementProducts">Announcement Products:</label>
+            <input type="text" id="announcementProducts" name="announcementProducts">
+
+            <button type="submit", class="announcement-submit-button">Submit Announcement</button>
+        </form>
+
+        
         <!-- Content for Stock Management goes here -->
     </section>
 
