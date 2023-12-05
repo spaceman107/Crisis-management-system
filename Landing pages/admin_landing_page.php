@@ -1,3 +1,6 @@
+<?php
+include "connection.php";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -188,7 +191,27 @@
         .announcement-submit-button:hover {
             background-color: #45a049;
         }
-    
+
+        .transport-submit-button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin: 20px;
+        }
+
+        .transport-submit-button:hover {
+            background-color: #45a049;
+        }
+        
+        .transport-form label  {
+            text-align: left;
+        }
+
     </style>
 
 </head>
@@ -221,12 +244,11 @@
             </ul>
 
         <h3>Select items for transport</h3>
-        <form action="" method="post">
+        <form action="process_transfer.php" method="post" class="transport-form">
             <label for="categories">Select Item Categories:</label><br>
             <select name="name_category">
              <option value="">Select item categories</option>
             <?php
-            include "connection.php";
             $sql = "SELECT * from product_type";
             $result = $con->query($sql);
 
@@ -235,14 +257,28 @@
                     $category_name = $row['name_category'];
                     $category_id = $row['product_category_id'];
 
-                   echo '<option value="'.$category_id. '">'.$category_name.'</option>';
+                   echo '<option value="'.$category_id.'">'.$category_name.'</option>'; ?> 
+            </select>
+            <label for="items">Select Items:</label><br>
+            <select name="name">
+                <option value="">Select items:</option>
+            <?php
+            $sqln = "SELECT * from product where product_category ='.$category_id.' ";
+            $resultn = $con->query($sqln);
+
+            if ($resultn->num_rows > 0) {
+                while ($rown = $resultn->fetch_assoc()) {
+                    $product_name = $rown['name'];
+                    $product_id = $rown['product_id'];
+
+                   echo '<option value="'.$product_id.'">'.$product_name.'</option>';
                 }
-            } else {
-                echo "No categories available";
-            }
-            ?>
-    </select>
-    <input type="submit" name="submit">
+            } 
+        }
+    } ?>
+            </select>
+
+    <button type="submit", class="transport-submit-button">Submit Transport</button>
     </form>
         
     </section>
