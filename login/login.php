@@ -13,23 +13,34 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
     {
                 //ρεαδ φρομ  database
-            $query = "select * from login_info where username = '$user_name' limit 1";
+            $query = "select * from user where username = '$user_name' ";
        $result =  mysqli_query($con, $query);
        
        if($result)
         { 
-          if($result && mysqli_num_rows($result) > 0 )
-            {
-                 
+            if ($result && mysqli_num_rows($result) > 0) {
                 $user_data = mysqli_fetch_assoc($result);
-
-                if ($user_data["password"] === $password )
-                {
-                  $_SESSION['id'] = $user_data["id"];
-                  header("Location: index.php");
-                  die;
+            
+                if ($user_data["password"] === $password) {
+                    $_SESSION['id'] = $user_data["id"];
+                    $_SESSION['user_type'] = $user_data["user_type"]; // Add user type to the session
+            
+                    // Redirect based on user type
+                    switch ($_SESSION['user_type']) {
+                        case 'Admin':
+                            header("Location: admin_page.php");
+                            break;
+                        case 'Rescuer':
+                            header("Location: rescuer_page.php");
+                            break;
+                        case 'Citizen':
+                        default:
+                            header("Location: user_page.php");
+                            break;
+                    }
+                    die;
                 }
-            } 
+            }
 
          }
        
@@ -41,9 +52,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
         echo "Please enter some valid information!";
     }
 
+
 }
-
-
+ 
 
 ?>
 
@@ -68,3 +79,4 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 
 </body>
 </html>
+ 
