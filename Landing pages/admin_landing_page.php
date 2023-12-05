@@ -1,14 +1,25 @@
 <?php
-include "connection.php";
-?>
+session_start();
+include("connection.php");
+include("functions.php");
 
+// Retrieve coordinates from the database
+$fetchCoordinatesQuery = "SELECT x_coordinate AS lat, y_coordinate AS lng FROM location";
+$coordinatesResult = mysqli_query($con, $fetchCoordinatesQuery);
+
+$coordinates = [];
+while ($row = mysqli_fetch_assoc($coordinatesResult)) {
+    $coordinates[] = $row;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-
+    
      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
@@ -31,16 +42,16 @@ include "connection.php";
             padding: 10px;
         }
 
-        #map { height: 80%; 
-               width: 80%;
-        }
-
         section {
             position: relative;
             flex: 1;
             padding: 20px;
         }
-
+        
+        #map { height: 80%; 
+               width: 80%;
+        }
+            
         .logout-btn {
             position: absolute;
             top: 30px;
@@ -105,27 +116,6 @@ include "connection.php";
             border-bottom: 2px solid #444;
             padding-bottom: 5px;
         }
-
-        section ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        section a {
-            text-decoration: none;
-            color: rgb(135, 84, 84);
-            display: block;
-            padding: 10px;
-            margin-bottom: 5px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        section a:hover {
-            background-color: #111;
-        }
-    
 
         ul {
             list-style-type: none;
@@ -200,32 +190,15 @@ include "connection.php";
         .announcement-submit-button:hover {
             background-color: #45a049;
         }
-
-        .transport-submit-button {
-            background-color: #4caf50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-            margin: 20px;
-        }
-
-        .transport-submit-button:hover {
-            background-color: #45a049;
-        }
         
-        .transport-form label  {
-            text-align: left;
-        }
 
+        
     </style>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
+
 
 </head>
 <body>
@@ -250,78 +223,37 @@ include "connection.php";
 
     <section id="stock-management">
         <h2>Stock Management</h2>
-        <h3>Load product description from json file</h3>
-            <ul>
-                <li><a href="#load-json-from-usidas">Load json from Usidas</a></li>
-                <li><a href="#upload-json">Upload local json file</a></li>
-            </ul>
-
-        <h3>Select items for transport</h3>
-        <form action="process_transfer.php" method="post" class="transport-form">
-            <label for="categories">Select Item Categories:</label><br>
-            <select name="name_category">
-             <option value="">Select item categories</option>
-            <?php
-            $sql = "SELECT * from product_type";
-            $result = $con->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $category_name = $row['name_category'];
-                    $category_id = $row['product_category_id'];
-
-                   echo '<option value="'.$category_id.'">'.$category_name.'</option>'; ?> 
-            </select>
-            <label for="items">Select Items:</label><br>
-            <select name="name">
-                <option value="">Select items:</option>
-            <?php
-            $sqln = "SELECT * from product where product_category ='.$category_id.' ";
-            $resultn = $con->query($sqln);
-
-            if ($resultn->num_rows > 0) {
-                while ($rown = $resultn->fetch_assoc()) {
-                    $product_name = $rown['name'];
-                    $product_id = $rown['product_id'];
-
-                   echo '<option value="'.$product_id.'">'.$product_name.'</option>';
-                }
-            } 
-        }
-    } ?>
-            </select>
-
-    <button type="submit", class="transport-submit-button">Submit Transport</button>
-    </form>
-        
-    </section>
-
-    <section id="view-map">
-        <h2>View Map</h2>
-
-        <div id="map"></div>
-
-         <script>
-
-         var map = L.map('map').setView([51.505, -55.09], 13);
-         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-        
-        var popup = L.popup();
-
-        function onMapClick(e) {
-            popup
-                .setLatLng(e.latlng)
-                .setContent("You clicked the map at " + e.latlng.toString())
-                .openOn(map);
-        }
-        map.on('click', onMapClick);
-
-        </script>
         <!-- Content for Stock Management goes here -->
     </section>
+
+ <section id="view-map">
+        <h2>View Map</h2>
+        <div id="map"></div>
+
+        <script>
+          var map = L.map('map').setView([37.983810, 23.727539], 11);
+
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap contributors'
+          }).addTo(map);
+
+        
+          // Coordinates from PHP
+          var coordinates = <?php echo json_encode($coordinates); ?>;
+
+          // Add markers to the map with colored icons
+          coordinates.forEach(item => {
+          var markerUser = L.divIcon({
+            html :'<img src="https://cdn-icons-png.flaticon.com/512/4151/4151073.png" width="30" height="30" alt="Custom Marker">',
+            className: 'markerUser',
+            iconSize: [30, 20],     
+            });
+ 
+           L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerUser }).addTo(map).bindPopup("I am a user.");
+           });
+        </script>
+
+   </section>
 
     <section id="stock-view">
         <h2>Stock View</h2>
