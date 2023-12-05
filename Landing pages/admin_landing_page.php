@@ -3,14 +3,29 @@
     include("connection.php");
     include("functions.php");
 
-    // Retrieve coordinates from the database
-    $fetchCoordinatesQuery = "SELECT x_coordinate AS lat, y_coordinate AS lng FROM location";
-    $coordinatesResult = mysqli_query($con, $fetchCoordinatesQuery);
+// COORDINATES FOR USER(PINS)
+$UserCoordinatesQuery = " SELECT x_coordinate AS lat, y_coordinate AS lng
+    FROM location 
+    INNER JOIN user  ON location.location_id = user.location_id ";
+$UserCoordinatesResult = mysqli_query($con, $UserCoordinatesQuery);
 
-    $coordinates = [];
-    while ($row = mysqli_fetch_assoc($coordinatesResult)) {
-        $coordinates[] = $row;
-    }
+$UserCoordinates = [];
+while ($row = mysqli_fetch_assoc($UserCoordinatesResult)) {
+    $UserCoordinates[] = $row;
+}
+
+
+// COORDINATES FOR BASE(PINS)
+$BaseCoordinatesQuery = " SELECT x_coordinate AS lat, y_coordinate AS lng
+    FROM location 
+    INNER JOIN base  ON location.location_id = base.location_id ";
+$BaseCoordinatesResult = mysqli_query($con, $BaseCoordinatesQuery);
+
+$BaseCoordinates = [];
+while ($row = mysqli_fetch_assoc($BaseCoordinatesResult)) {
+    $BaseCoordinates[] = $row;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -313,27 +328,44 @@
         <div id="map"></div>
 
 
-         <script>
+        <script>
           var map = L.map('map').setView([37.983810, 23.727539], 11);
 
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '© OpenStreetMap contributors'
           }).addTo(map);
 
-
+        
           // Coordinates from PHP
-          var coordinates = <?php echo json_encode($coordinates); ?>;
+          var UserCoordinates = <?php echo json_encode($UserCoordinates); ?>;
 
           // Add markers to the map with colored icons
-          coordinates.forEach(item => {
+          UserCoordinates.forEach(item => {
           var markerUser = L.divIcon({
             html :'<img src="https://cdn-icons-png.flaticon.com/512/4151/4151073.png" width="30" height="30" alt="Custom Marker">',
             className: 'markerUser',
             iconSize: [30, 20],     
             });
+ 
+            L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerUser }).addTo(map).bindPopup("I am a user.");
+          
+            });
 
-           L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerUser }).addTo(map).bindPopup("I am a user.");
-           });
+       // Coordinates from PHP
+       var BaseCoordinates = <?php echo json_encode($BaseCoordinates); ?>;
+
+       // Add markers to the map with colored icons
+       BaseCoordinates.forEach(item => {
+       var markerBase = L.divIcon({
+         html :'<img src="https://cdn.iconscout.com/icon/free/png-256/free-base-1786434-1520324.png" width="30" height="30" alt="Custom Marker">',
+         className: 'markerBase',
+         iconSize: [30, 20],     
+         });
+
+         L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerBase }).addTo(map).bindPopup("Base");
+
+        });
+
         </script>
         <!-- Content for Stock Management goes here -->
     </section>
