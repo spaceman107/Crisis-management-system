@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 02, 2023 at 08:25 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Dec 07, 2023 at 05:04 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -88,6 +88,14 @@ CREATE TABLE `product` (
   `name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`product_id`, `quantity`, `product_category`, `details`, `name`) VALUES
+(1, 1, 1, 'steak', ''),
+(2, 1, 1, 'steak', '');
+
 -- --------------------------------------------------------
 
 --
@@ -98,6 +106,13 @@ CREATE TABLE `product_type` (
   `product_category_id` int(9) NOT NULL,
   `name_category` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product_type`
+--
+
+INSERT INTO `product_type` (`product_category_id`, `name_category`) VALUES
+(1, 'Meat');
 
 -- --------------------------------------------------------
 
@@ -134,7 +149,7 @@ CREATE TABLE `transaction` (
   `product_id` int(11) NOT NULL,
   `number_of_people_in_need` int(11) NOT NULL,
   `status` enum('PENDING','ACCEPTED','COMPLETE','') NOT NULL,
-  `type` enum('REQUEST','OFFER','','') NOT NULL,
+  `type` enum('REQUEST','OFFER') NOT NULL,
   `time_of_submition` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `time_of_acceptance` timestamp NOT NULL DEFAULT current_timestamp(),
   `time_of_completion` timestamp NOT NULL DEFAULT current_timestamp()
@@ -163,7 +178,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `user_type`, `first_name`, `last_name`, `phone`, `location_id`) VALUES
 (4, 'teo1', '123456', '', 'teo', 'kon', '111111', 7),
-(5, 'teo', '12345', '', 'teo', 'kon ', '7777', 8);
+(5, 'teo', '12345', '', 'teo', 'kon ', '7777', 8),
+(6, 'admin', '12345', 'Admin', 'admin', 'admin', 'admin', 7);
 
 -- --------------------------------------------------------
 
@@ -280,10 +296,22 @@ ALTER TABLE `location`
   MODIFY `location_id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `product_id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `product_type`
+--
+ALTER TABLE `product_type`
+  MODIFY `product_category_id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `vehicle`
