@@ -4,26 +4,58 @@
     include("functions.php");
 
 // COORDINATES FOR USER(PINS)
-$UserCoordinatesQuery = " SELECT x_coordinate AS lat, y_coordinate AS lng
+// COORDINATES FOR USER REQUEST (PINS)
+$RequestCoordinatesQuery = " SELECT x_coordinate AS lat, y_coordinate AS lng ,   user.first_name ,user.last_name,user.phone, transaction.time_of_submition
     FROM location 
-    INNER JOIN user  ON location.location_id = user.location_id ";
-$UserCoordinatesResult = mysqli_query($con, $UserCoordinatesQuery);
+    INNER JOIN user  ON location.location_id = user.location_id 
+    INNER JOIN transaction ON user.user_id = transaction.user_id 
+    WHERE transaction.type = 'REQUEST'";
+$RequestCoordinatesResult = mysqli_query($con, $RequestCoordinatesQuery);
 
-$UserCoordinates = [];
-while ($row = mysqli_fetch_assoc($UserCoordinatesResult)) {
-    $UserCoordinates[] = $row;
+$RequestCoordinates = [];
+while ($row = mysqli_fetch_assoc($RequestCoordinatesResult)) {
+    $RequestCoordinates[] = $row;
+}
+// COORDINATES FOR USER OFFER (PINS)
+$OfferCoordinatesQuery = " SELECT x_coordinate AS lat, y_coordinate AS lng ,   user.first_name ,user.last_name,user.phone, transaction.time_of_submition,product_category 
+    FROM location    
+    INNER JOIN user  ON location.location_id = user.location_id 
+    INNER JOIN transaction ON user.user_id = transaction.user_id 
+    INNER JOIN product ON transaction.product_id = product.product_id  
+    WHERE transaction.type = 'OFFER' ";
+$OfferCoordinatesResult = mysqli_query($con, $OfferCoordinatesQuery);
+
+$OfferCoordinates = [];
+while ($row = mysqli_fetch_assoc($OfferCoordinatesResult)) {
+    $OfferCoordinates[] = $row;
 }
 
 
 // COORDINATES FOR BASE(PINS)
-$BaseCoordinatesQuery = " SELECT x_coordinate AS lat, y_coordinate AS lng
+$BaseCoordinatesQuery = "SELECT base.base_id, location.x_coordinate AS lat, location.y_coordinate AS lng
     FROM location 
-    INNER JOIN base  ON location.location_id = base.location_id ";
+    INNER JOIN base ON location.location_id = base.location_id";
 $BaseCoordinatesResult = mysqli_query($con, $BaseCoordinatesQuery);
 
 $BaseCoordinates = [];
 while ($row = mysqli_fetch_assoc($BaseCoordinatesResult)) {
     $BaseCoordinates[] = $row;
+}
+// COORDINATES FOR vehicle(PINS)
+$VehicleCoordinatesQuery = " SELECT vehicle.vehicle_name, product.product_name ,transaction.status, x_coordinate AS lat, y_coordinate AS lng
+    FROM location 
+    INNER JOIN user ON location.location_id = user.location_id 
+    INNER JOIN rescuer ON user.user_id = rescuer.user_id
+    INNER JOIN vehicle ON  rescuer.vehicle_id = vehicle.vehicle_id 
+    INNER JOIN task ON vehicle.vehicle_id = task.vehicle_id
+    INNER JOIN transaction ON task.transaction_id = transaction.transaction_id
+    INNER JOIN product ON transaction.product_id = product.product_id";
+
+$VehicleCoordinatesResult = mysqli_query($con, $VehicleCoordinatesQuery);
+
+$VehicleCoordinates = [];
+while ($row = mysqli_fetch_assoc($VehicleCoordinatesResult)) {
+    $VehicleCoordinates[] = $row;
 }
 
 ?>
@@ -247,6 +279,21 @@ while ($row = mysqli_fetch_assoc($BaseCoordinatesResult)) {
             text-align: left;
         }
 
+        .json-fetch-data input{
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin: 20px;
+            width: fit-content;
+            
+        }
+        
+
     </style>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -278,14 +325,22 @@ while ($row = mysqli_fetch_assoc($BaseCoordinatesResult)) {
         <h2>Stock Management</h2>
         <h3>Load product description from json file</h3>
             <ul>
-                <li><a href="#load-json-from-usidas">Load json from Usidas</a></li>
-                <li><a href="#upload-json">Upload local json file</a></li>
+                <li><form action="json_usidas.php" method="post" class="json-fetch-data">
+                    <input type="submit" name="fetch_json_usidas" value="Json from Usidas" >
+                    </form>
+                </li>
+                <li><form action="json_local.php" method="post" enctype="multipart/form-data" class="json-fetch-data">
+                    <input type = "file" name="json_local" accept=".json" required>
+                    <br>
+                    <input type="submit" name="fetch_json_local" value="Upload local json file" >
+                    </form>
+                </li>
             </ul>
 
         <h3>Select items for transport</h3>
         <form action="process_transfer.php" method="post" class="transport-form">
             <label for="categories">Select Item Categories:</label><br>
-            <select name="name_category">
+            <select name="category" id="category">
              <option value="">Select item categories</option>
             <?php
             $sql = "SELECT * from product_type";
@@ -296,29 +351,46 @@ while ($row = mysqli_fetch_assoc($BaseCoordinatesResult)) {
                     $category_name = $row['name_category'];
                     $category_id = $row['product_category_id'];
 
-                   echo '<option value="'.$category_id.'">'.$category_name.'</option>'; ?> 
-            </select>
-            <label for="items">Select Items:</label><br>
-            <select name="name">
-                <option value="">Select items:</option>
-            <?php
-            $sqln = "SELECT * from product where product_category ='.$category_id.' ";
-            $resultn = $con->query($sqln);
-
-            if ($resultn->num_rows > 0) {
-                while ($rown = $resultn->fetch_assoc()) {
-                    $product_name = $rown['name'];
-                    $product_id = $rown['product_id'];
-
-                   echo '<option value="'.$product_id.'">'.$product_name.'</option>';
+                   echo '<option value="'.$category_id.'">'.$category_name.'</option>';
                 }
-            } 
-        }
-    } ?>
+            } ?> 
             </select>
+            <br>
+            <div id="itemTables"></div>
 
-    <button type="submit", class="transport-submit-button">Submit Transport</button>
-    </form>
+            <input type="submit" value="Submit Items for transport">
+        </form>
+            
+    <script>
+        // Fetch items based on selected category using JavaScript
+        document.getElementById('category').addEventListener('change', function() {
+            var category = this.value;
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var items = JSON.parse(xhr.responseText);
+                        var table = '<table><tr><th>Select</th><th>Item ID</th><th>Item Name</th></tr>';
+                        items.forEach(function(item) {
+                            table += '<tr>';
+                            table += '<td><input type="checkbox" name="selectedItems[]" value="' + item.product_id + '"></td>';
+                            table += '<td>' + item.product_id + '</td>';
+                            table += '<td>' + item.product_name + '</td>';
+                            table += '</tr>';
+                        });
+                        table += '</table>';
+                        var newItemTable = document.createElement('div');
+                        newItemTable.innerHTML = '<h3>Items in Category ' + category + '</h3>' + table;
+                        document.getElementById('itemTables').appendChild(newItemTable);
+                    } else {
+                        console.error(xhr.status);
+                    }
+                }
+            };
+            xhr.open('GET', 'get_items.php?category=' + category, true);
+            xhr.send();
+        });
+    </script>
         
     </section>
 
@@ -337,34 +409,104 @@ while ($row = mysqli_fetch_assoc($BaseCoordinatesResult)) {
 
         
           // Coordinates from PHP
-          var UserCoordinates = <?php echo json_encode($UserCoordinates); ?>;
-
+          var OfferCoordinates = <?php echo json_encode($OfferCoordinates); ?>;
+          console.log(OfferCoordinates); 
           // Add markers to the map with colored icons
-          UserCoordinates.forEach(item => {
-          var markerUser = L.divIcon({
+          OfferCoordinates.forEach(item => {
+          var markerOffer= L.divIcon({
             html :'<img src="https://cdn-icons-png.flaticon.com/512/4151/4151073.png" width="30" height="30" alt="Custom Marker">',
-            className: 'markerUser',
+            className: 'markerOffer',
             iconSize: [30, 20],     
             });
  
-            L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerUser }).addTo(map).bindPopup("I am a user.");
+            L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerOffer }).addTo(map).bindPopup("Offer.");
           
             });
 
-       // Coordinates from PHP
-       var BaseCoordinates = <?php echo json_encode($BaseCoordinates); ?>;
+         // Coordinates from PHP
+         var RequestCoordinates = <?php echo json_encode($RequestCoordinates); ?>;
+          console.log(RequestCoordinates); 
+          // Add markers to the map with colored icons
+          RequestCoordinates.forEach(item => {
+          var markerRequest= L.divIcon({
+            html :'<img src="https://cdn-icons-png.flaticon.com/512/4151/4151073.png" width="30" height="30" alt="Custom Marker">',
+            className: 'markerRequest',
+            iconSize: [30, 20],     
+            });
+ 
+            L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerRequest }).addTo(map).bindPopup("Request.");
+          
+            });    
 
-       // Add markers to the map with colored icons
-       BaseCoordinates.forEach(item => {
-       var markerBase = L.divIcon({
-         html :'<img src="https://cdn.iconscout.com/icon/free/png-256/free-base-1786434-1520324.png" width="30" height="30" alt="Custom Marker">',
-         className: 'markerBase',
-         iconSize: [30, 20],     
-         });
 
-         L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerBase }).addTo(map).bindPopup("Base");
 
+
+            var BaseCoordinates = <?php echo json_encode($BaseCoordinates); ?>;
+var draggableMarkers = {};
+
+BaseCoordinates.forEach(item => {
+    var markerBase = L.divIcon({
+        html: '<img src="https://cdn.iconscout.com/icon/free/png-256/free-base-1786434-1520324.png" width="30" height="30" alt="Custom Marker">',
+        className: 'markerBase',
+        iconSize: [30, 20],
+    });
+
+    var baseMarker = L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerBase, draggable: true }).addTo(map).bindPopup("Base id :" + item.base_id);
+
+    // Event listener for dragend
+    baseMarker.on('dragend', function (event) {
+        var marker = event.target;
+        var position = marker.getLatLng();
+        var baseId = item.base_id;
+
+        // Ask for confirmation before updating the coordinates
+        if (confirm("Are you sure you want to update the coordinates?")) {
+            // Redirect to the PHP script with updated coordinates
+            updateCoordinates(baseId, position.lat, position.lng);
+        } else {
+            // Revert the marker position if the user cancels
+            marker.setLatLng(new L.LatLng(item.lat, item.lng));
+        }
+    });
+
+    draggableMarkers[item.base_id] = baseMarker;
+});
+
+function updateCoordinates(baseId, lat, lng) {
+    // Use Fetch API to send a POST request to the PHP script
+    fetch('update_base_coordinates.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `baseId=${baseId}&lat=${lat}&lng=${lng}`,
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('Coordinates updated successfully');
+            } else {
+                alert('Error updating coordinates');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
+}
+
+
+var VehicleCoordinates = <?php echo json_encode($VehicleCoordinates); ?>;
+
+VehicleCoordinates.forEach(item => {
+    var markerVehicle = L.divIcon({
+        html: '<img src="https://png.pngtree.com/png-vector/20220119/ourmid/pngtree-vehicle-leaflet-material-vector-icon-label-png-image_4239122.png" width="30" height="30" alt="Custom Marker">',
+        className: 'markerVehicle',
+        iconSize: [30, 20],
+    });
+
+    L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerVehicle }).addTo(map).bindPopup("vehicle name :" + item.vehicle_name + "");
+});
+;
 
         </script>
         <!-- Content for Stock Management goes here -->
@@ -447,4 +589,3 @@ while ($row = mysqli_fetch_assoc($BaseCoordinatesResult)) {
 
 </body>
 </html>
-
