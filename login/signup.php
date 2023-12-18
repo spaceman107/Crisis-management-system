@@ -81,7 +81,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 
         <input type="submit" value="Signup" name="submit"><br><br>
      
-        <a href="Login.php">Click to login</a><br><br>  
+        <a href="login.php">Click to login</a><br><br>  
     </form>
   
     <div id="map">
