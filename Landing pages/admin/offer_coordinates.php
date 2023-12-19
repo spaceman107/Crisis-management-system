@@ -1,4 +1,10 @@
-<?PHP
+<?php
+session_start();
+include("../../login/connection.php");
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 
 $OfferCoordinatesQuery = " SELECT x_coordinate AS lat, y_coordinate AS lng , user.first_name , user.last_name,user.phone, transaction.time_of_submition, product_category 
     FROM location 
@@ -11,7 +17,7 @@ $OfferCoordinatesResult = mysqli_query($con, $OfferCoordinatesQuery);
 $OfferCoordinates = [];
 while ($row = mysqli_fetch_assoc($OfferCoordinatesResult)) {
     $OfferCoordinates[] = $row;
-    header('Content-Type: application/json');
-echo json_encode($OfferCoordinates);
 }
+header('Content-Type: application/json');
+echo json_encode($OfferCoordinates);
 ?>

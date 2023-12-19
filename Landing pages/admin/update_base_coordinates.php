@@ -1,6 +1,9 @@
 <?php
 session_start();
-include("connection.php");
+include("../../login/connection.php");
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 // Check if the required parameters are set
 if (isset($_POST['baseId'], $_POST['lat'], $_POST['lng'])) {

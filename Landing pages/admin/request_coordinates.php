@@ -1,7 +1,10 @@
 <?php
 session_start();
-include("connection.php");
-include("functions.php");
+include("../../login/connection.php");
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 // COORDINATES FOR USER REQUEST (PINS)
 $RequestCoordinatesQuery = " SELECT x_coordinate AS lat, y_coordinate AS lng ,   user.first_name ,
 user.last_name,
@@ -16,7 +19,8 @@ $RequestCoordinatesResult = mysqli_query($con, $RequestCoordinatesQuery);
 $RequestCoordinates = [];
 while ($row = mysqli_fetch_assoc($RequestCoordinatesResult)) {
     $RequestCoordinates[] = $row;
-    header('Content-Type: application/json');
-echo json_encode($RequestCoordinates);
 }
+header('Content-Type: application/json');
+echo json_encode($RequestCoordinates);
 ?> 
+

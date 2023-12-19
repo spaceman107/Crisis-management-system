@@ -1,7 +1,10 @@
 <?PHP
 session_start();
-include("connection.php");
-include("functions.php");
+include("../../login/connection.php");
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 // COORDINATES FOR BASE(PINS)
 $BaseCoordinatesQuery = "SELECT base.base_id, location.x_coordinate AS lat, location.y_coordinate AS lng
     FROM location 
@@ -11,8 +14,10 @@ $BaseCoordinatesResult = mysqli_query($con, $BaseCoordinatesQuery);
 $BaseCoordinates = [];
 while ($row = mysqli_fetch_assoc($BaseCoordinatesResult)) {
     $BaseCoordinates[] = $row;
+
+}
+
     header('Content-Type: application/json');
 echo json_encode($BaseCoordinates);
-}
 
 ?>

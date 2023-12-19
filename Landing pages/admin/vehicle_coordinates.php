@@ -1,14 +1,17 @@
 <?php
 session_start();
-include("connection.php");
-include("functions.php");
+include("../../login/connection.php");
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 $VehicleCoordinatesQuery = "
 SELECT 
     vehicle.vehicle_name, 
-    GROUP_CONCAT(product.name) AS product_names, 
+    GROUP_CONCAT(product.product_name) AS product_names, 
     GROUP_CONCAT(transaction.status) AS transaction_statuses,
     location.x_coordinate AS lat,
-    location.y_coordinate AS lng,
+    location.y_coordinate AS lng
 FROM 
     location 
     INNER JOIN user ON location.location_id = user.location_id 
