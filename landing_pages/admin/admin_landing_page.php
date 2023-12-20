@@ -341,7 +341,7 @@
 
     <section id="view-map">
    <div id="map"></div>
-        <script type="text/javascript" src="Admin_map.js"></script>
+        <script type="text/javascript" src="view_map/admin_map.js"></script>
         <!-- Content for Stock Management goes here -->
     </section>
 
