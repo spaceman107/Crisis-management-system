@@ -113,7 +113,7 @@ include("../../login/connection.php");
         <div id="view-map" class="panel">
             <h2>View Map Panel</h2>
             <div id="map"></div>
-            <script type="text/javascript" src="Admin_map.js"></script>
+            <script type="text/javascript" src="view_map/admin_map.js"></script>
         </div>
         <div id="stock-view" class="panel">
             <h2>Stock View Panel</h2>
