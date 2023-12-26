@@ -136,7 +136,51 @@ include("../../login/connection.php");
         </div>
         <div id="transaction-statistics" class="panel">
             <h2>Transactions Statistics Panel</h2>
-            <p>Content for Transactions Statistics...</p>
+                  
+            <div style="width: 700px;">
+            <canvas id="myChart"></canvas>
+        </div>
+ 
+        <script type="text/javascript" src="transaction_Statistics_Chart.js"></script>
+
+<label for="startMonth">Start Month:</label>
+<select id="startMonth">
+<option value="1">January</option>
+  <option value="2">February</option>
+  <option value="3">March</option>
+  <option value="4">April</option>
+  <option value="5">May</option>
+  <option value="6">June</option>
+  <option value="7">July</option>
+  <option value="8">August</option>
+  <option value="9">September</option>
+  <option value="10">October</option>
+  <option value="11">November</option>
+  <option value="12">December</option>
+</select>
+
+<label for="startYear">Start Year:</label>
+<input type="text" id="startYear" placeholder="YYYY">
+
+<label for="endMonth">End Month:</label>
+<select id="endMonth">
+  <option value="1">January</option>
+  <option value="2">February</option>
+  <option value="3">March</option>
+  <option value="4">April</option>
+  <option value="5">May</option>
+  <option value="6">June</option>
+  <option value="7">July</option>
+  <option value="8">August</option>
+  <option value="9">September</option>
+  <option value="10">October</option>
+  <option value="11">November</option>
+  <option value="12">December</option>
+</select>
+<label for="endYear">End Year:</label>
+<input type="text" id="endYear" placeholder="YYYY">
+
+<button onclick="fetchAndUpdateChart()">Update Chart</button>
         </div>
         <div id="add-rescuer" class="panel">
             <h2>Add Rescuer Panel</h2>
