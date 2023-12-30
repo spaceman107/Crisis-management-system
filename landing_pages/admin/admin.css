@@ -28,7 +28,7 @@ header {
     display: none;
 }
 
-#stock-view {
+#stock-management {
     display: block;
     /* Show the Stock Management panel by default */
 }
