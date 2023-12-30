@@ -118,9 +118,9 @@ include("../../login/connection.php");
         </div>
         <div id="stock-view" class="panel">
             <h2>Stock View Panel</h2>
-             
-            <label for="category-filter">Choose a category:</label>
-            <select name="categories" id="categories-dropdown"></select>
+
+            <label for="category-filter">Choose categories:</label>
+            <div id="categories-checkboxes"></div>
 
             <table class="styled-table" border="1">
                 <thead>
@@ -130,11 +130,13 @@ include("../../login/connection.php");
                         <th>Category</th>
                         <th>Details</th>
                         <th>Name</th>
+                        <th>Quantity for tranfer</th>
                     </tr>
                 </thead>
                 <tbody id="tBody"></tbody>
             </table>
         </div>
+
         <div id="transaction-statistics" class="panel">
             <h2>Transactions Statistics Panel</h2>
                   
@@ -142,7 +144,7 @@ include("../../login/connection.php");
             <canvas id="myChart"></canvas>
         </div>
  
-        <script type="text/javascript" src="transaction_Statistics_Chart.js"></script>
+        <script type="text/javascript" src="transaction statistics/transaction_Statistics_Chart.js"></script>
 
 <label for="startMonth">Start Month:</label>
 <select id="startMonth">
