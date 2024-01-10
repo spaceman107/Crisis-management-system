@@ -14,10 +14,9 @@ include("../../login/connection.php");
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="stock_view/fetch_data.js"></script> 
-    
+    <script src="stock_view/fetch_data.js"></script>
+   
     <link rel="stylesheet" type="text/css" href="admin.css" />
-    
 </head>
 
 <body>
@@ -118,10 +117,8 @@ include("../../login/connection.php");
         </div>
         <div id="stock-view" class="panel">
             <h2>Stock View Panel</h2>
-
             <label for="category-filter">Choose categories:</label>
             <div id="categories-checkboxes"></div>
-
             <table class="styled-table" border="1">
                 <thead>
                     <tr>
@@ -136,54 +133,49 @@ include("../../login/connection.php");
                 <tbody id="tBody"></tbody>
             </table>
         </div>
-
         <div id="transaction-statistics" class="panel">
             <h2>Transactions Statistics Panel</h2>
-                  
             <div style="width: 700px;">
-            <canvas id="myChart"></canvas>
-        </div>
- 
-        <script type="text/javascript" src="transaction statistics/transaction_Statistics_Chart.js"></script>
-
-<label for="startMonth">Start Month:</label>
-<select id="startMonth">
-<option value="1">January</option>
-  <option value="2">February</option>
-  <option value="3">March</option>
-  <option value="4">April</option>
-  <option value="5">May</option>
-  <option value="6">June</option>
-  <option value="7">July</option>
-  <option value="8">August</option>
-  <option value="9">September</option>
-  <option value="10">October</option>
-  <option value="11">November</option>
-  <option value="12">December</option>
-</select>
-
-<label for="startYear">Start Year:</label>
-<input type="text" id="startYear" placeholder="YYYY">
-
-<label for="endMonth">End Month:</label>
-<select id="endMonth">
-  <option value="1">January</option>
-  <option value="2">February</option>
-  <option value="3">March</option>
-  <option value="4">April</option>
-  <option value="5">May</option>
-  <option value="6">June</option>
-  <option value="7">July</option>
-  <option value="8">August</option>
-  <option value="9">September</option>
-  <option value="10">October</option>
-  <option value="11">November</option>
-  <option value="12">December</option>
-</select>
-<label for="endYear">End Year:</label>
-<input type="text" id="endYear" placeholder="YYYY">
-
-<button onclick="fetchAndUpdateChart()">Update Chart</button>
+                <canvas id="myChart"></canvas>
+            </div>
+            <script type="text/javascript" src="transaction statistics/transaction_Statistics_Chart.js"></script>
+            <form>
+            <label for="startMonth">Start Month:</label>
+                <select id="startMonth">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <label for="startYear">Start Year:</label>
+                <input type="text" id="startYear" placeholder="YYYY">
+                <label for="endMonth">End Month:</label>
+                <select id="endMonth">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <label for="endYear">End Year:</label>
+                <input type="text" id="endYear" placeholder="YYYY">
+                <button onclick="fetchAndUpdateChart()">Update Chart</button>
+            </form>
         </div>
         <div id="add-rescuer" class="panel">
             <h2>Add Rescuer Panel</h2>
@@ -204,7 +196,7 @@ include("../../login/connection.php");
                 <input type="submit" value="Add rescuer" name="submit"><br><br>
                 <div id="map1"></div>
                 <script>
-                var map1 = L.map('map1').setView([37.983810, 23.727539], 11);
+                    var map1 = L.map('map1').setView([37.983810, 23.727539], 11);
 
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '© OpenStreetMap contributors'
@@ -234,7 +226,14 @@ include("../../login/connection.php");
         </div>
         <div id="create-announcement" class="panel">
             <h2>Create Announcement Panel</h2>
-            <p>Content for Create Announcement...</p>
+            <form>
+                <label for="announcementText">Announcement Text:</label>
+                <textarea id="announcementText" name="announcementText" rows="5" cols="55"></textarea>
+                <label for="announcementProducts">Announcement Products:</label>
+                <input type="text" id="announcementProducts" name="announcementProducts">
+                <button type="submit" onclick="submitForm()">Submit Announcement</button>
+                <script src="create_announcement/create_announcement.js"></script>
+            </form>
         </div>
     </div>
     <script type="text/javascript">
