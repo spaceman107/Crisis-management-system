@@ -110,10 +110,15 @@ include("../../login/connection.php");
             });
             </script>
         </div>
-        <div id="view-map" class="panel">
+         <div id="view-map" class="panel">
             <h2>View Map Panel</h2>
             <div id="map"></div>
-            <script type="text/javascript" src="view_map/admin_map.js"></script>
+            <form id="updateForm" action="update_base_coordinates.php" method="post">
+        <input type="hidden" id="latInput" name="lat" value="">
+       <input type="hidden" id="lngInput" name="lng" value="">
+       <input type="hidden" id="location_id" name="locationId" value="">
+             </form>
+            <script type="text/javascript" src="Admin_map.js"></script>
         </div>
         <div id="stock-view" class="panel">
             <h2>Stock View Panel</h2>
