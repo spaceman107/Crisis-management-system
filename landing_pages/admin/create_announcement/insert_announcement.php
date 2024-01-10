@@ -1,38 +1,40 @@
 <?php
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "";
-$dbname = "crisis management";
+session_start();
+include("connection.php");
 
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-// Create connection
-$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
 }
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    respondWithError('Invalid request method');
+}
+error_log('Received data: ' . file_get_contents('php://input'));
 
-$announcementText = $_POST['announcementText'];
-$productIds = $_POST['productIds'];
-
+$data = json_decode(file_get_contents('php://input'), true);
+$announcementText =$data['announcementText'];
+$productIds = $data['productIds'];
+logToErrorLog('Product id: ' . $productIds);
 // Insert data into the 'announcement' table
 $sql = "INSERT INTO announcement (description) VALUES ('$announcementText')";
-$conn->query($sql);
+$con->query($sql);
 
 // Get the last inserted announcement_id
-$announcementId = $conn->insert_id;
+$announcementId = $con->insert_id;
 
 // Insert data into the 'announcement_products' table
 foreach ($productIds as $productId) {
     $sql = "INSERT INTO announcement_products (announcement_id, product_id) VALUES ('$announcementId', '$productId')";
-    $conn->query($sql);
+    $con->query($sql);
 }
 
-$conn->close();
+$con->close();
+
+// Helper function to log messages to the error log
+function logToErrorLog($message) {
+    error_log($message);
+}
 ?>
 
