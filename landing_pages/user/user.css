@@ -1,0 +1,393 @@
+header {
+    background-color: #111;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logout-btn {
+    background-color: #4285f4;
+    color: #fff;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 15px;
+    margin-left: 5px;
+}
+
+.logout-btn:hover {
+    background-color: #0056b3;
+}
+
+/*hide all the other panels*/
+.panel {
+    display: none;
+}
+
+#new-request {
+    display: block;
+    /* Show the Stock Management panel by default */
+}
+
+/* The sidebar menu */
+.sidebar {
+    height: 100%;
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111;
+    /* Black*/
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 60px;
+    /* Place content 60px from the top */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidebar */
+}
+
+/* The sidebar links */
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* The button used to open the sidebar */
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+}
+
+.openbtn:hover {
+    background-color: #444;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s;
+    /* If you want a transition effect */
+    padding: 20px;
+}
+
+#main h2 {
+    border-bottom: 2px solid #444;
+    padding-bottom: 5px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/*************************/
+/* Stock managment Panel */
+/*************************/
+/*    .json-fetch-data,
+    .transport-form {
+        margin-bottom: 20px;
+    }
+
+    .json-fetch-data input,
+    .transport-form select {
+        margin-bottom: 10px;
+    }
+
+    .transport-form label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .json-fetch-data input[type="submit"],
+    .transport-form input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .json-fetch-data input[type="submit"]:hover,
+    .transport-form input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .transport-form select,
+    .transport-form input[type="file"] {
+
+        padding: 8px;
+        margin: 5px 0 15px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+*/
+
+/******************/
+/* View Map Panel */
+/******************/
+
+#map {
+    width: 100%;
+    height: 500px;
+}
+
+
+
+
+/******************/
+/*Stock View Panel*/
+/******************/
+label {
+    margin-right: 10px;
+}
+
+    #categories-checkboxes {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+        .category-checkbox-container {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        margin-bottom: 5px;
+    }
+
+    .category-checkbox {
+                margin-right: 5px;
+        margin-bottom: 5px;
+
+    }
+
+
+
+ /* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+} 
+
+
+
+
+
+
+
+
+
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.styled-table th {
+    background-color: #f2f2f2;
+}
+
+#tBody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/*******************/
+/*Add rescuer panel*/
+/*******************/
+
+/*somethhing affects view map layer control*/
+
+button[type="new-request"] {
+
+    width: 90%;
+    font-size: 20px;
+
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+button[type="submit"] {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+form select {
+    padding: 8px;
+    margin: 5px 0 15px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#map1 {
+    height: 200px;
+    width: 100%;
+    margin-top: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+
+    .sidebar a {
+        font-size: 18px;
+    }
+}
