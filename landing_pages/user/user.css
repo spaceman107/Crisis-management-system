@@ -28,7 +28,7 @@ header {
     display: none;
 }
 
-#new-request {
+#announcements {
     display: block;
     /* Show the Stock Management panel by default */
 }
@@ -103,6 +103,47 @@ header {
 .openbtn:hover {
     background-color: #444;
 }
+
+
+
+/*****************************************************************************************/
+.announcement-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-list {
+    list-style: none;
+    padding: 0;
+}
+
+.product-list li {
+    margin-bottom: 5px;
+}
+
+.donate-button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
@@ -379,6 +420,18 @@ form select {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+
+
+.announcement-products {
+    width: 5%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+
+
+
 
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
