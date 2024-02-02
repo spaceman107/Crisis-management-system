@@ -292,9 +292,21 @@ function openNav() {
     </div>
     <div id="main">
         <!-- Panels -->
-        <div id="stock-management" class="panel">
-            <!-- Stock Management Panel Content -->
+         <div id="stock-management" class="panel">
+        <div id="productList"></div>
+<button onclick="showProductsInVehicle()">προιόντα στο όχημα</button>
+<!-- Button to Fetch and Display Products -->
+
+<button onclick="showProducts()">προιόντα στην βάση</button>
+
+<!-- Button to Execute SQL Query on Selected Products -->
+<button id="myButton" onclick="executeQuery()">φόρτωση</button>
+
+<button id="myButton1" onclick="unload()">εκφόρτωση</button>
+
+<script src="stock_management.js"></script>
         </div>
+
 
         <div id="view-map" class="panel">
         <div id="map"></div>
