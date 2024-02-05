@@ -80,6 +80,7 @@ fetch('offer_coordinates.php')
                     "<br>Phone: " + item.phone +
                     "<br>Time of Submission: " + item.time_of_submition +
                     "<br>Product Category: " + item.name_category +
+                    "<br>Product Quantity: " + item.quantity +
                     "<br> Status : Pending" );
                     marker.on('click', function () {
                         // Call the common function with the user_id and transaction_id
@@ -144,6 +145,7 @@ fetch('request_coordinates_pending.php')
                     "<br>Phone: " + item.phone +
                     "<br>Time of Submission: " + item.time_of_submition +
                     "<br>Product Category: " + item.name_category +
+                    "<br>Product Quantity: " + item.quantity +
                     "<br> Status : Pending" );
 
                     marker.on('click', function () {
