@@ -58,11 +58,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     
                    
                     const button1 = document.createElement('button');
-                    button1.innerText = 'Complete';
+                    button1.innerText = 'cancel';
                     button1.style.display = 'block'; 
                     
                     const button2 = document.createElement('button');
-                    button2.innerText = 'Cancel';
+                    button2.innerText = 'Complete';
                     button2.style.display = 'none'; 
                     
                     
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     listItem.appendChild(button2);
                     
                     taskListContainer.appendChild(listItem);
-                    button1.onclick = () => handleTaskCompletion(taskItem);
+                    button1.onclick = () => handleTaskCancellation(taskItem);
                     updateButtonVisibility(taskMarker, button2, item);
                 });
             })
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
              
                 button2.style.display = 'block';
               
-                button2.onclick = () => handleTaskCancellation(taskItem);
+                button2.onclick = () => handleTaskCompletion(taskItem);
             } else {
               
                 button2.style.display = 'none';
