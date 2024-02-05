@@ -3,7 +3,13 @@ session_start();
 include("connection.php");
 include("functions.php");
 // Assuming $con is your database connection
-$OfferCoordinatesQuery = "SELECT x_coordinate AS lat, y_coordinate AS lng, user.first_name, user.last_name, user.phone, transaction.time_of_submition, product.product_category 
+$OfferCoordinatesQuery = "SELECT x_coordinate AS lat, y_coordinate AS lng, 
+user.first_name,
+user.last_name, 
+user.phone, 
+transaction.quantity,
+transaction.time_of_submition,
+ product.product_category 
     FROM location 
     INNER JOIN user ON location.location_id = user.location_id 
     INNER JOIN transaction ON user.user_id = transaction.user_id 
