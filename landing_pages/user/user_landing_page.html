@@ -10,6 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="announcements/announcements.js"></script>
     <script src="new_request/fetch_data.js"></script>
+    <script src="transaction_history/history.js"></script>
     <link rel="stylesheet" type="text/css" href="user.css" />
 </head>
 
@@ -62,6 +63,17 @@
         </div>
         <div id="transaction-history" class="panel">
             <h2>Transaction history</h2>
+            <table class="styled-table" border="1">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Status</th>
+                            <th>Accepted on</th>
+                            <th>Completed on</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hisBody"></tbody>
+            </table>
         </div>
         <div id="announcements" class="panel">
             <h2>Announcements</h2>
@@ -92,28 +104,3 @@
 </body>
 
 </html>
-<!-- <div class="announcement-card">
-    <h2>We need food</h2>
-    <p>Date: <span class="date">undefined</span></p>
-    <div class="announcement-body">
-        <p>We need food</p>
-        </div>
-            <ul class="product-list">
-                <li><label><input type="checkbox" class="announcement-products" name="products[]" value="Orange juice"><input type="text" id="productsQuantity" name="quantity">Orange juice</label></li>
-                <li><label><input type="checkbox" class="announcement-products" name="products[]" value="Bread"><input type="text" id="productsQuantity" name="quantity">Bread</label></li>
-                <li><label><input type="checkbox" class="announcement-products" name="products[]" value="Bread"><input type="text" id="productsQuantity" name="quantity">Bread</label></li>
-            </ul><button class="donate-button">Donate</button>
-
-        </div>
-    </div>
-
-<div class="announcement-card">
-    <h2>We need supplies</h2>
-    <p>Date: <span class="date">undefined</span></p>
-    <div class="announcement-body">
-        <p>We need supplies</p>
-    </div>
-    <ul class="product-list">
-        <li><label><input type="checkbox" class="announcement-products" name="products[]" value="Sardines"><input type="text" id="productsQuantity" name="quantity">Sardines</label></li>
-    </ul><button class="donate-button">Donate</button>
-</div> -->
