@@ -1,19 +1,24 @@
 <?php
 session_start();
 include("../../../login/connection.php");
-include("functions.php");
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
 
-$query = "SELECT product_category_id, name_category FROM product_type";
-$result = $con->query($query);
+//fetch categories names from the database
+$sql = "SELECT * FROM product_type";
+$result = mysqli_query($con, $sql);
 
-// Fetch categories as an associative array
-$categories = array();
-while ($row = $result->fetch_assoc()) {
-    $categories[] = $row;
+//catch errors in the query
+if (!$result) {
+    die("Error: " . mysqli_error($con));
 }
 
+//turn the results in an associative array
+$categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+//use the assosiative array to return the products as JSON
 header('Content-Type: application/json');
 echo json_encode($categories);
+
+//close the con
+mysqli_close($con);
 ?>
+
