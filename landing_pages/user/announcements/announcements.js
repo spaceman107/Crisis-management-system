@@ -1,5 +1,3 @@
-// Assuming you are using jQuery for simplicity
-
 $(document).ready(function() {
     // AJAX request to get announcements from the server
     $.ajax({
@@ -8,35 +6,38 @@ $(document).ready(function() {
         dataType: 'json',
         success: function(data) {
             // Iterate through each announcement
-            data.forEach(function(announcement) {
-                // Create a new announcement card
+            data.forEach(function (announcement) {
                 var announcementCard = $('<div class="announcement-card"></div>');
-
-                // Populate the announcement card with data
-                announcementCard.append('<h2>' + announcement.description + '</h2>');
+                announcementCard.append('<h2>Announcement</h2>');
                 announcementCard.append('<p>Date: <span class="date">' + announcement.date + '</span></p>');
 
-                // Announcement body
                 var announcementBody = $('<div class="announcement-body"></div>');
                 announcementBody.append('<p>' + announcement.description + '</p>');
                 announcementCard.append(announcementBody);
 
-                // Displaying products for the announcement
                 if (announcement.products) {
+                    var form = $('<form action="announcements/create_donation.php" method="post"></form>'); 
                     var productList = $('<ul class="product-list"></ul>');
                     var products = announcement.products.split(', ');
+                    var pro_id = announcement.pro_id.split(', ');
 
-                    products.forEach(function(product) {
-                        productList.append('<li><label><input type="checkbox" class="announcement-products" name="products[]" value="' + product + '">' + product + '</label></li>');
-                    });
+                    productList.append('<p>Select the products and insert the desired quantity for instant donation:</p>');
 
-                    announcementCard.append(productList);
+
+
+                    for (var i = 0; i < products.length; i++) {
+                        var product = products[i];
+                        var pro_ids = pro_id[i];  
+
+                        productList.append('<li><input type="checkbox" name="products[]" class="announcement-products" value="' + pro_ids + '">' +
+                                                '<input type="text" name="quantities[]" class="announcement-products" min="1">' + '&nbsp;&nbsp;' + product + '</li>');
+                    }
+
+                    form.append(productList);
+                    form.append('<button type="submit" class="donate-button">Donate</button>');
+                    announcementCard.append(form);
                 }
 
-                // Button to select products for donation
-                announcementCard.append('<button class="donate-button">Donate</button>');
-
-                // Append the announcement card to the document
                 $('#announcements').append(announcementCard);
             });
         },

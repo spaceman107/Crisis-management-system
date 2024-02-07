@@ -28,7 +28,7 @@ header {
     display: none;
 }
 
-#announcements {
+#new-request {
     display: block;
     /* Show the Stock Management panel by default */
 }
@@ -111,16 +111,20 @@ header {
     background-color: #fff;
     border: 1px solid #ddd;
     padding: 1rem;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 0 auto;
+
 }
 
 .product-list {
     list-style: none;
-    padding: 0;
+    padding: 1px;
 }
 
 .product-list li {
+    border-bottom: black;
     margin-bottom: 5px;
 }
 
@@ -131,7 +135,6 @@ header {
     border: none;
     cursor: pointer;
 }
-
 
 
 
@@ -162,58 +165,6 @@ ul {
     padding: 0;
 }
 
-/*************************/
-/* Stock managment Panel */
-/*************************/
-/*    .json-fetch-data,
-    .transport-form {
-        margin-bottom: 20px;
-    }
-
-    .json-fetch-data input,
-    .transport-form select {
-        margin-bottom: 10px;
-    }
-
-    .transport-form label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .json-fetch-data input[type="submit"],
-    .transport-form input[type="submit"] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .json-fetch-data input[type="submit"]:hover,
-    .transport-form input[type="submit"]:hover {
-        background-color: #45a049;
-    }
-
-    .transport-form select,
-    .transport-form input[type="file"] {
-
-        padding: 8px;
-        margin: 5px 0 15px;
-        display: inline-block;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-    }
-*/
-
-/******************/
-/* View Map Panel */
-/******************/
-
-#map {
-    width: 100%;
-    height: 500px;
-}
 
 
 
@@ -225,93 +176,94 @@ label {
     margin-right: 10px;
 }
 
-    #categories-checkboxes {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 10px;
-    }
-        .category-checkbox-container {
-        display: flex;
-        align-items: center;
-        margin-right: 10px;
-        margin-bottom: 5px;
-    }
+#categories-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
 
-    .category-checkbox {
-                margin-right: 5px;
-        margin-bottom: 5px;
+.category-checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
 
-    }
+.category-checkbox {
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+}
 
 
 
- /* Customize the label (the container) */
+/* Customize the label (the container) */
 .container {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 /* Hide the browser's default checkbox */
 .container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
 }
 
 /* Create a custom checkbox */
 .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #ccc;
+.container:hover input~.checkmark {
+    background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  background-color: #2196F3;
+.container input:checked~.checkmark {
+    background-color: #2196F3;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
+    content: "";
+    position: absolute;
+    display: none;
 }
 
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
-  display: block;
+.container input:checked~.checkmark:after {
+    display: block;
 }
 
 /* Style the checkmark/indicator */
 .container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-} 
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
 
 
 
@@ -354,22 +306,22 @@ button[type="new-request"] {
     width: 90%;
     font-size: 20px;
 
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 
 button[type="submit"] {
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 form {
@@ -421,16 +373,44 @@ form select {
     border-radius: 5px;
 }
 
+.announcement-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 
 .announcement-products {
-    width: 5%;
+    width: 44px;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.announcement-products input[type="text"] {
+    width: 35px;
+    padding-left: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.products-quantity {
+    width: 35px;
     padding: 8px;
     margin-bottom: 16px;
     box-sizing: border-box;
 }
 
 
-
+label {
+    border-bottom: black;
+    margin-bottom: 5px;
+}
+form.request  {
+    max-width: 1000px;
+}
 
 
 

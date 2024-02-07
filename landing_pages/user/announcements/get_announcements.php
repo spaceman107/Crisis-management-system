@@ -17,7 +17,7 @@ $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 
 
-$query = "SELECT a.announcement_id, a.description, GROUP_CONCAT(p.product_name SEPARATOR ', ') AS products
+$query = "SELECT a.announcement_id, a.description,GROUP_CONCAT(ap.product_id SEPARATOR ', ') AS pro_id, GROUP_CONCAT(p.product_name SEPARATOR ', ') AS products
           FROM announcement a
           LEFT JOIN announcement_products ap ON a.announcement_id = ap.announcement_id
           LEFT JOIN product p ON ap.product_id = p.product_id
