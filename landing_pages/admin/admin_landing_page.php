@@ -57,58 +57,22 @@ include("../../login/connection.php");
                     </form>
                 </li>
             </ul>
-            <h3>Select items for transport</h3>
-            <form action="process_transfer.php" method="post" class="transport-form">
-                <label for="categories">Select Item Categories:</label><br>
-                <select name="category" id="category">
-                    <option value="">Select item categories</option>
-                    <?php
-            $sql = "SELECT * from product_type";
-            $result = $con->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $category_name = $row['name_category'];
-                    $category_id = $row['product_category_id'];
-
-                   echo '<option value="'.$category_id.'">'.$category_name.'</option>';
-                }
-            } ?>
+             <h2>Choose Item Category</h2>
+                <select id="categorySelect">
+                    <!-- Categories will be dynamically loaded here -->
                 </select>
-                <br>
-                <div id="itemTables"></div>
-                <input type="submit" value="Submit Items for transport">
-            </form>
-            <script>
-            // Fetch items based on selected category using JavaScript
-            document.getElementById('category').addEventListener('change', function() {
-                var category = this.value;
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                        if (xhr.status === 200) {
-                            var items = JSON.parse(xhr.responseText);
-                            var table = '<table><tr><th>Select</th><th>Item ID</th><th>Item Name</th></tr>';
-                            items.forEach(function(item) {
-                                table += '<tr>';
-                                table += '<td><input type="checkbox" name="selectedItems[]" value="' + item.product_id + '"></td>';
-                                table += '<td>' + item.product_id + '</td>';
-                                table += '<td>' + item.product_name + '</td>';
-                                table += '</tr>';
-                            });
-                            table += '</table>';
-                            var newItemTable = document.createElement('div');
-                            newItemTable.innerHTML = '<h3>Items in Category ' + category + '</h3>' + table;
-                            document.getElementById('itemTables').appendChild(newItemTable);
-                        } else {
-                            console.error(xhr.status);
-                        }
-                    }
-                };
-                xhr.open('GET', 'get_items.php?category=' + category, true);
-                xhr.send();
-            });
-            </script>
+            
+                <form id="itemsForm" onsubmit="submitForm(event)" method="POST">
+                    <h2>Choose Items for Transport</h2>
+                    <div id="itemsContainer"></div>
+                   <button type="submit" id="submitButton">Make Items Available for Transport</button>
+                </form>
+                <script type="text/javascript" src="stock_management/stock_management.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', async function () {
+            await initializeStockManagement();
+        });
+    </script>
         </div>
          <div id="view-map" class="panel">
             <h2>View Map Panel</h2>
