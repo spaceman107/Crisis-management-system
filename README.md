@@ -17,8 +17,8 @@ add_rescuer
 admin.css  
 admin_landing_page.php  
 create_announcement  
-stock_management   ✅ 
-stock_view  
+stock_management    
+stock_view✅  
 'transacrion statistics'  
 view_map  
   
