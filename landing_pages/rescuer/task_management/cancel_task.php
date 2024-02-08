@@ -6,17 +6,16 @@ include("functions.php");
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-$transactionId = $data['transactionId']; // Capture the transaction_id from the request
+$transactionId = $data['transactionId']; 
 
-// Update your SQL to also check for transaction_id
 $sql = "UPDATE transaction SET status = 'cancelled' WHERE  transaction_id = ?";
 $stmt = $con->prepare($sql);
-$stmt->bind_param("i", $transactionId); // Ensure correct parameter types are used ("i" for integer)
+$stmt->bind_param("i", $transactionId); 
 $result = $stmt->execute();
 
 $sql1 = "DELETE FROM task WHERE task.transaction_id = ?";
 $stmt = $con->prepare($sql1);
-$stmt->bind_param("i", $transactionId); // Ensure correct parameter types are used ("i" for integer)
+$stmt->bind_param("i", $transactionId);
 $result1 = $stmt->execute();
 
 
