@@ -46,6 +46,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
+            //categories are sent to the php file as parameters in the request 
             url: 'stock_view/fetch_products.php?category=' + categories.join(','),
             method: 'GET',
             dataType: 'json',
