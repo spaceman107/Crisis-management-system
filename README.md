@@ -32,7 +32,7 @@ task_management
 view_map  
   
 ./user:  
-announcements  
+announcements✅  
 new_request  
 transaction_history✅  
 user.css  
