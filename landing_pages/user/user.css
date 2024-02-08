@@ -9,7 +9,7 @@ header {
 }
 
 .logout-btn {
-    background-color: #4285f4;
+    background-color: indianred;
     color: #fff;
     padding: 0.5em 1em;
     text-decoration: none;
@@ -20,7 +20,7 @@ header {
 }
 
 .logout-btn:hover {
-    background-color: #0056b3;
+    background-color: darkred;
 }
 
 /*hide all the other panels*/
@@ -30,7 +30,7 @@ header {
 
 #new-request {
     display: block;
-    /* Show the Stock Management panel by default */
+    /* Show the new request panel by default */
 }
 
 /* The sidebar menu */
@@ -129,7 +129,7 @@ header {
 }
 
 .donate-button {
-    background-color: #4caf50;
+    background-color: darkslateblue;
     color: #fff;
     padding: 8px 16px;
     border: none;
@@ -137,18 +137,6 @@ header {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
     transition: margin-left .5s;
     /* If you want a transition effect */
@@ -166,12 +154,10 @@ ul {
 }
 
 
+/*******************/
+/****Categories*****/
+/*******************/
 
-
-
-/******************/
-/*Stock View Panel*/
-/******************/
 label {
     margin-right: 10px;
 }
@@ -270,7 +256,9 @@ label {
 
 
 
-
+/*******************/
+/*******Tables******/
+/*******************/
 
 
 
@@ -296,18 +284,13 @@ label {
     background-color: #f5f5f5;
 }
 
-/*******************/
-/*Add rescuer panel*/
-/*******************/
-
-/*somethhing affects view map layer control*/
 
 button[type="new-request"] {
 
     width: 90%;
     font-size: 20px;
 
-    background-color: #4caf50;
+    background-color: darkslateblue;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -317,7 +300,7 @@ button[type="new-request"] {
 
 
 button[type="submit"] {
-    background-color: #4caf50;
+    background-color: darkslateblue;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -346,7 +329,7 @@ input {
 }
 
 input[type="submit"] {
-    background-color: #4caf50;
+    background-color: darkslateblue;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -366,13 +349,10 @@ form select {
     box-sizing: border-box;
 }
 
-#map1 {
-    height: 200px;
-    width: 100%;
-    margin-top: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
+/*******************/
+/***Announcements***/
+/*******************/
+
 
 .announcement-card {
     background-color: #fff;
@@ -409,7 +389,8 @@ label {
     border-bottom: black;
     margin-bottom: 5px;
 }
-form.request  {
+
+form.request {
     max-width: 1000px;
 }
 
