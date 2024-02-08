@@ -5,11 +5,11 @@ $(document).ready(function() {
         if (confirm("Are you sure you want to cancel this transaction?")) {
             
             $.ajax({
-                url: 'transaction_history/reject_transaction.php',
+                url: 'transaction_history/cancel_transaction.php',
                 method: 'POST',
                 data: { transactionId: transactionId },
                 success: function(response) {
-                    // Handle success
+                    
                     console.log('Transaction canceled successfully');
                      
                     //refresh the table after deletion doesnt work???
@@ -39,8 +39,8 @@ $(document).ready(function() {
                     '<td>' + entry.time_of_completion + '</td>' +
                     '</tr>');
 
-                //dont add button for COMPLETE or REJECTED
-                if (entry.status !== 'COMPLETE' && entry.status !== 'REJECTED') {
+                //dont add button for COMPLETE or CANCELED
+                if (entry.status !== 'COMPLETE' && entry.status !== 'CANCELED') {
                     row.append('<td><button class="cancel-button">CANCEL</button></td>');
                 } else {
                     row.append('<td></td>'); 

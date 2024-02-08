@@ -1,24 +1,12 @@
 <?php
-// Replace these values with your actual database connection details
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "";
-$dbname = "crisis management";
+session_start();
+include("../../../login/connection.php");
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
 
-// Create connection
-$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+if (isset($_SESSION['user_id'])) {
+    $logged_in_user_id = $_SESSION['user_id'];
+    $sql = "SELECT transaction_id, status, time_of_acceptance, time_of_completion FROM transaction WHERE user_id = $logged_in_user_id";
 }
-
-
-$sql = "SELECT transaction_id, status, time_of_acceptance, time_of_completion FROM transaction WHERE user_id = '4'";
-
 
 $result = mysqli_query($conn, $sql);
 
