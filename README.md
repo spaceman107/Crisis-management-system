@@ -32,6 +32,6 @@ view_map
 ./user:  
 announcements  
 new_request  
-transaction_history  
+transaction_history✅  
 user.css  
 user_landing_page.html  
