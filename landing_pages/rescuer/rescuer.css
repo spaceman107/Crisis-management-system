@@ -9,7 +9,7 @@ header {
 }
 
 .logout-btn {
-    background-color: #4285f4;
+    background-color: indianred;
     color: #fff;
     padding: 0.5em 1em;
     text-decoration: none;
@@ -20,7 +20,7 @@ header {
 }
 
 .logout-btn:hover {
-    background-color: #0056b3;
+    background-color: darkred;
 }
 
 /*hide all the other panels*/
@@ -121,50 +121,6 @@ ul {
     padding: 0;
 }
 
-/*************************/
-/* Stock managment Panel */
-/*************************/
-/*    .json-fetch-data,
-    .transport-form {
-        margin-bottom: 20px;
-    }
-
-    .json-fetch-data input,
-    .transport-form select {
-        margin-bottom: 10px;
-    }
-
-    .transport-form label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .json-fetch-data input[type="submit"],
-    .transport-form input[type="submit"] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .json-fetch-data input[type="submit"]:hover,
-    .transport-form input[type="submit"]:hover {
-        background-color: #45a049;
-    }
-
-    .transport-form select,
-    .transport-form input[type="file"] {
-
-        padding: 8px;
-        margin: 5px 0 15px;
-        display: inline-block;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-    }
-*/
-
 /******************/
 /* View Map Panel */
 /******************/
@@ -237,7 +193,7 @@ input {
 }
 
 input[type="submit"] {
-    background-color: #4caf50;
+    background-color: darkslateblue;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -246,7 +202,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: darkslateblue;
 }
 
 form select {
