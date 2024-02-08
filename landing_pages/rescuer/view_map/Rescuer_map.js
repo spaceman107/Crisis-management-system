@@ -5,15 +5,15 @@ var offerLayerHimself = L.layerGroup();
 var requestpendingLayer = L.layerGroup();
 var requestLayerHimself = L.layerGroup();
 var baseLayer = L.layerGroup();
-
+var lines = L.layerGroup();
 var RescuerLayer = L.layerGroup();
 var draggableMarkers = {};
-
+ var rescuerCoordinates = { lat: null, lng: null };
 // Create the map and add the tile layer
 const map = L.map('map', {
     center: [37.983810, 23.727539],
     zoom: 10,
-    layers: [RescuerLayer, requestpendingLayer, offerLayerPending, requestLayerHimself, baseLayer, offerLayerHimself]
+    layers: [RescuerLayer, requestpendingLayer, offerLayerPending, requestLayerHimself, baseLayer, offerLayerHimself,lines]
 
    
 });
@@ -30,7 +30,7 @@ const overlays = {
     "PENDING OFFERS": offerLayerPending,
     "MY OFFERS " : offerLayerHimself,
     "BASES": baseLayer,
-    
+    "LINES": lines,
     "RESCUER" : RescuerLayer
 };
 
@@ -91,38 +91,7 @@ fetch('offer_coordinates.php')
     })
     .catch(error => console.error('Error fetching data:', error));
 
-    fetch('offer_coordinates_himself.php')
-    .then(response => response.json())
-    .then(OfferHimselfCoordinates => {
-        console.log(OfferHimselfCoordinates);
-
-        OfferHimselfCoordinates.forEach(item => {
-          
-
-            var markerOffer1 = L.divIcon({
-               
-                className: 'markerOffer1',
-                html: '<img src="https://image.pngaaa.com/232/2702232-middle.png" width="30" height="30" alt="Custom Marker">',
-                iconSize: [30, 20],
-            });
-
-            L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerOffer1 })
-                .addTo(offerLayerHimself)
-                .bindPopup(
-                    "User Fullname: " + item.first_name + " " + item.last_name +
-                    "<br>Phone: " + item.phone +
-                    "<br>Time of Submission: " + item.time_of_submition +
-                    "<br>Time of Acceptance: " + item.time_of_acceptance +
-                    "<br>Product Category: " + item.name_category +
-                   // posothta
-                    "<br>Vehicle name: " + item.vehicle_name 
-
-                     );
-
-        });
-    })
-    .catch(error => console.error('Error fetching data:', error));
-
+   
 ///REQUEST PENDING COORDINATES
 
 fetch('request_coordinates_pending.php')
@@ -157,34 +126,7 @@ fetch('request_coordinates_pending.php')
     })
     .catch(error => console.error('Error fetching data:', error));
 
-///HIS REQUEST  COORDINATES
 
-fetch('Request_Coordinates_Himself.php')
-    .then(response => response.json())
-    .then(RequestAcceptedCoordinates => {
-        console.log('RequestAcceptedCoordinates:', RequestAcceptedCoordinates);
-
-
-        RequestAcceptedCoordinates.forEach(item => {
-            var markerAcceptedRequest = L.divIcon({
-                html: '<img src="https://cdn-icons-png.flaticon.com/512/4151/4151073.png" width="30" height="30" alt="Custom Marker">',
-                className: 'markerAcceptedRequest',
-                iconSize: [30, 20],
-            });
-
-            L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerAcceptedRequest })
-
-                .addTo(requestLayerHimself)
-                .bindPopup(
-                    "User Fullname: " + item.first_name + " " + item.last_name +
-                    "<br>Phone: " + item.phone +
-                    "<br>Time of Submission: " + item.time_of_submition +
-                    "<br>Time of Acceptance: " + item.time_of_acceptance +
-                    "<br>Product Category: " + item.name_category +
-                    "<br>Vehicle Name: " + item.vehicle_name);
-        });
-    })
-    .catch(error => console.error('Error fetching data:', error));
 
 
   
@@ -266,6 +208,9 @@ fetch('base_coordinates.php')
                 draggable: true
             }).addTo(RescuerLayer)
 
+            rescuerCoordinates.lat = parseFloat(item.lat);
+            rescuerCoordinates.lng = parseFloat(item.lng);
+
             RescuerMarker.on('dragend', function(event) {
                 var newLatLng = event.target.getLatLng();
                 document.getElementById('latInput').value = newLatLng.lat;
@@ -285,3 +230,83 @@ fetch('base_coordinates.php')
         // updateCoordinates(someLat, someLng);
     })
     .catch(error => console.error('Error fetching data:', error));
+
+
+
+   
+  ///HIS REQUEST  COORDINATES
+
+fetch('Request_Coordinates_Himself.php')
+.then(response => response.json())
+.then(RequestAcceptedCoordinates => {
+    console.log('RequestAcceptedCoordinates:', RequestAcceptedCoordinates);
+
+
+    RequestAcceptedCoordinates.forEach(item => {
+        var markerAcceptedRequest = L.divIcon({
+            html: '<img src="https://cdn-icons-png.flaticon.com/512/4151/4151073.png" width="30" height="30" alt="Custom Marker">',
+            className: 'markerAcceptedRequest',
+            iconSize: [30, 20],
+        });
+
+        L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerAcceptedRequest })
+
+            .addTo(requestLayerHimself)
+            .bindPopup(
+                "User Fullname: " + item.first_name + " " + item.last_name +
+                "<br>Phone: " + item.phone +
+                "<br>Time of Submission: " + item.time_of_submition +
+                "<br>Time of Acceptance: " + item.time_of_acceptance +
+                "<br>Product Category: " + item.name_category +
+                "<br>Vehicle Name: " + item.vehicle_name);
+    
+                if (rescuerCoordinates.lat && rescuerCoordinates.lng) {
+                    L.polyline([
+                        [rescuerCoordinates.lat, rescuerCoordinates.lng],
+                        [parseFloat(item.lat), parseFloat(item.lng)]
+                    ], { color: 'blue' }).addTo(lines);
+                }
+    
+            });
+})
+.catch(error => console.error('Error fetching data:', error));
+
+
+
+fetch('offer_coordinates_himself.php')
+.then(response => response.json())
+.then(OfferHimselfCoordinates => {
+    console.log(OfferHimselfCoordinates);
+
+    OfferHimselfCoordinates.forEach(item => {
+      
+
+        var markerOffer1 = L.divIcon({
+           
+            className: 'markerOffer1',
+            html: '<img src="https://image.pngaaa.com/232/2702232-middle.png" width="30" height="30" alt="Custom Marker">',
+            iconSize: [30, 20],
+        });
+
+        L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerOffer1 })
+            .addTo(offerLayerHimself)
+            .bindPopup(
+                "User Fullname: " + item.first_name + " " + item.last_name +
+                "<br>Phone: " + item.phone +
+                "<br>Time of Submission: " + item.time_of_submition +
+                "<br>Time of Acceptance: " + item.time_of_acceptance +
+                "<br>Product Category: " + item.name_category +
+               // posothta
+                "<br>Vehicle name: " + item.vehicle_name 
+
+                 )
+                 if (rescuerCoordinates.lat && rescuerCoordinates.lng) {
+                    L.polyline([
+                        [rescuerCoordinates.lat, rescuerCoordinates.lng],
+                        [parseFloat(item.lat), parseFloat(item.lng)]
+                    ], { color: 'red' }).addTo(lines);
+                }
+
+    });
+})
+.catch(error => console.error('Error fetching data:', error));
