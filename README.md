@@ -9,6 +9,8 @@ logout
 εξτρα πεδιο στα product available  
 lines for markers  
 chart.js refresh  
+database autoincrement  
+database indexes  
 -------------------------------------------
 fixed comments and connection.php:  
   
