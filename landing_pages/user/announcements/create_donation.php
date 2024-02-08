@@ -1,16 +1,6 @@
 <?php
-
-
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "";
-$dbname = "crisis management";
-
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-
-// Create connection
-$connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+session_start();
+include("../../../login/connection.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $selectedProducts = $_POST['products'];
@@ -23,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $sql = "INSERT INTO transaction (transaction_id, user_id,product_id,number_of_people_in_need,status, type, quantity) VALUES (45,4,$product,'3','PENDING','OFFER', $quantity)";
                    
-            mysqli_query($connection, $sql);
+            mysqli_query($con, $sql);
 
     }
 }
