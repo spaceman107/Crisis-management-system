@@ -1,20 +1,17 @@
 function showProductsInVehicle() {
     
 
-    // Fetch products associated with the specified vehicle_id
     fetch('get_products_in_vehicle.php')
         .then(response => response.json())
         .then(products => {
             const productList = document.getElementById('productList');
             productList.innerHTML = "";  // Clear previous content
 
-            // Display products
             if (products.length > 0) {
                 products.forEach(product => {
                     const productName = product.product_name;
                     
 
-                    // Display product information (you can customize this part)
                     const productInfo = productName;
                     const productElement = document.createElement('p');
                     productElement.textContent = productInfo;
@@ -33,15 +30,12 @@ fetch('unload_products.php')
         // Check if the operation was successful
         if (data.success) {
             console.log('Products unloaded successfully. Message:', data.message);
-            // You can perform additional actions here if needed
         } else {
             console.error('Error:', data.error);
-            // Handle the error if the operation was not successful
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        // Handle other types of errors, e.g., network issues
     });
 
 }
@@ -54,7 +48,6 @@ function showProducts() {
             const productList = document.getElementById('productList');
             productList.innerHTML = "";  // Clear previous content
 
-            // Create checkboxes and input fields dynamically for each product
             products.forEach(product => {
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
@@ -83,27 +76,20 @@ function showProducts() {
 }
 
 
-// Function to execute SQL query on selected products
 function executeQuery() {
-    // Retrieve all checkboxes with name 'selectedProducts'
     const checkboxes = document.querySelectorAll('input[name="selectedProducts"]:checked');
 
-    // Create an array to store selected products and quantities
     const selectedProducts = [];
 
-    // Loop through the checked checkboxes and store product ID and quantity in the array
     checkboxes.forEach(checkbox => {
         const productId = checkbox.value;
 
-        // Assuming the quantity input is next to the checkbox within the label
         const quantityInput = checkbox.nextElementSibling;
         const quantity = quantityInput.value;
 
-        // Push the selected product and quantity to the array
         selectedProducts.push({ productId, quantity });
     });
 
-    // Send the selected products and quantities to a PHP script using fetch
     fetch('process_selected_products.php', {
         method: 'POST',
         headers: {
@@ -139,7 +125,6 @@ fetch('rescuer_coordinates.php')
             updateButtonVisibility();
         });
 
-        // Call updateCoordinates after markers are created (if needed)
         // updateCoordinates(someLat, someLng);
     })
     .catch(error => console.error('Error fetching data:', error));
