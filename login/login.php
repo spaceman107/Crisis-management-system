@@ -66,16 +66,22 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 </head>
 <body>
 
-<head1><h1>ΦΟΡΜΑ ΠΑΡΟΧΗΣ ΒΟΗΘΕΙΑΣ</h1></head1>
-<head1><h2>LOG IN</h2></head1>
-    <form  method="post">                                      <!--form-->
-        <label for="user_name">User_name:</label><br>
-        <input type="text" id="user_name" name="user_name"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br><br>
-        <input type="submit" value="Login" name="submit"><br><br>
-     <a href="signup.php">Click to Signup</a><br><br>  
-    </form>
+    <div class="form-container">
+        <h1 class="form-heading">Crisis Management System</h1>
+        <h2 class="form-subheading">Log In</h2>
+
+        <form method="post">
+            <label for="user_name">User Name:</label><br>
+            <input type="text" id="user_name" name="user_name"><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br><br>
+
+            <input type="submit" value="Login" name="submit"><br><br>
+            <a href="signup.php">Click to Signup</a><br><br>
+        </form>
+
+    </div>
 
 </body>
 </html>
