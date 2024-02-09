@@ -35,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
                             break;
                         case 'Citizen':
                         default:
-                            header("Location: ../landing_pages/user/user_landing_page.html");
+                            header("Location: ../landing_pages/user/user_landing_page.php");
                             break;
                     }
                     die;
