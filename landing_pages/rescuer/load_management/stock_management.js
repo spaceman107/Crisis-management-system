@@ -5,7 +5,7 @@ function showProductsInVehicle() {
         .then(response => response.json())
         .then(products => {
             const productList = document.getElementById('productList');
-            productList.innerHTML = ""; // Clear previous content
+            productList.innerHTML = ""; 
 
             if (products.length > 0) {
                 products.forEach(product => {
