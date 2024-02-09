@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    //AJAX request to fetch categories and populate the checkboxes
+
     $.ajax({
         url: 'new_request/fetch_categories.php',
         method: 'GET',
@@ -15,7 +15,7 @@ $(document).ready(function () {
                 );
             });
 
-            //initialize the table
+   
             loadTable(getSelectedCategories());
         },
         error: function (error) {
@@ -23,12 +23,12 @@ $(document).ready(function () {
         }
     });
 
-    //trigger loadTable() when there is a change in the selection
+    
     $(document).on('change', '.category-checkbox', function () {
         loadTable(getSelectedCategories());
     });
 
-    //get the checked checkboxes
+   
     function getSelectedCategories() {
         var selectedCategories = [];
         $('.category-checkbox:checked').each(function () {
@@ -37,7 +37,7 @@ $(document).ready(function () {
         return selectedCategories;
     }
 
-    //function to load the table based on the selected categories
+    
     function loadTable(categories) {
         //if no categories selected set selection to all
         if (categories.length === 0) {
@@ -45,12 +45,12 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            //categories are sent to the php file as parameters in the request
+           
             url: 'new_request/fetch_products.php?category=' + categories.join(','),
             method: 'GET',
             dataType: 'json',
             success: function (data) {
-                //populate the table body with id #tBody
+             
                 var tableBody = $('#tBody');
                 tableBody.empty();
 
