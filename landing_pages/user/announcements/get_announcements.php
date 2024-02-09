@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../../../login/connection.php");
+include("../../../login/functions.php");
 
 $query = "SELECT a.announcement_id, a.description,GROUP_CONCAT(ap.product_id SEPARATOR ', ') AS pro_id, GROUP_CONCAT(p.product_name SEPARATOR ', ') AS products
           FROM announcement a

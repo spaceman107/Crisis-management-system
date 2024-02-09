@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../../../login/connection.php");
+include("../../../login/functions.php");
 $logged_in_user_id = $_SESSION['user_id'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

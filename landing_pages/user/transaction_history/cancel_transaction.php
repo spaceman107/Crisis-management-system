@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../../../login/connection.php");
+include("../../../login/functions.php");
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

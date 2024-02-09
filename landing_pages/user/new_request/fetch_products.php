@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../../../login/connection.php");
+include("../../../login/functions.php");
 
 
 $selectedCategories = isset($_GET['category']) ? explode(',', $_GET['category']) : ['all'];

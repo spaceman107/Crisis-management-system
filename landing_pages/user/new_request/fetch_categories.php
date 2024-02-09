@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("../../../login/connection.php");
-}
+include("../../../login/functions.php");
 
 $sql = "SELECT * FROM product_type";
 $result = mysqli_query($con, $sql);
