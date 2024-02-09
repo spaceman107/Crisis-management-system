@@ -176,11 +176,11 @@ include("../../login/connection.php");
                 function onMapClick(e) {
                     const { lat, lng } = e.latlng;
 
-                    // Update the marker position
+                   
                     if (marker) {
                         marker.setLatLng(e.latlng);
                     } else {
-                        // Create a new marker if it doesn't exist
+                     
                         marker = L.marker(e.latlng).addTo(map1);
                     }
 
@@ -217,13 +217,13 @@ include("../../login/connection.php");
     }
 
     function changePanel(panelId) {
-        // Hide all panels
+      
         var panels = document.getElementsByClassName("panel");
         for (var i = 0; i < panels.length; i++) {
             panels[i].style.display = "none";
         }
 
-        // Show the selected panel
+    
         document.getElementById(panelId).style.display = "block";
     }
     </script>
