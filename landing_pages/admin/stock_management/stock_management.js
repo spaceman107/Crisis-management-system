@@ -1,10 +1,10 @@
-    let selectedCategories = []; // Array to store selected categories
-    let selectedItems = []; // Array to store selected items
+    let selectedCategories = []; 
+    let selectedItems = []; 
     
     async function initializeStockManagement() {  
     
 async function loadCategories() {
-    // Fetch item categories from the server
+    
     try {
         // Fetch categories
         selectedCategories = [];
@@ -12,7 +12,7 @@ async function loadCategories() {
         const categories = await response.json();
             const categorySelect = document.getElementById('categorySelect');
 
-            // Clear existing options
+           
             categorySelect.innerHTML = '';
 
             // Add default option
@@ -49,10 +49,10 @@ async function loadCategories() {
     const items = await response.json();
         const itemsContainer = document.getElementById('itemsContainer');
     
-        // Clear existing items
+       
         itemsContainer.innerHTML = '';
 
-        // Add checkboxes for each item
+      
         items.forEach(item => {
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
@@ -94,7 +94,7 @@ async function loadCategories() {
     const categorySelection = document.getElementById('categorySelect');
     categorySelection.addEventListener('change', async function (){
         console.log('Category changed:', this.value);
-        selectedCategories = [this.value]; // Store the selected category in the array
+        selectedCategories = [this.value]; 
         console.log('Selected categories:', selectedCategories);
         try {
             await loadItems();
@@ -111,7 +111,7 @@ async function loadCategories() {
         try {
         console.log('Submit form function is running.');
 
-        // Log the selectedItems array
+        
         console.log('Selected items:', selectedItems);
         
     
@@ -126,7 +126,7 @@ async function loadCategories() {
         }
     
         try {
-            // Assuming you have a server-side endpoint for updating item availability
+          
             const response = await fetch('stock_management/mark_items_available.php', {
                 method: 'POST',
                 headers: {
