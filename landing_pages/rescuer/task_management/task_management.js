@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 className: 'markerRescuer',
                 iconSize: [30, 30],
             });
-            rescuerMarker = L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: icon, draggable: true }).addTo(map1);
+            rescuerMarker = L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: icon}).addTo(map1);
         })
         .catch(error => console.error('Error fetching rescuer coordinates:', error));
 
