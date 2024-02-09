@@ -12,7 +12,7 @@ $product_category_id = isset($input['product_category_id']) ? $input['product_ca
 $query = "SELECT product_id, product_name FROM product WHERE product_category = $product_category_id";
 $result = $con->query($query);
 
-// Fetch items as an associative array
+
 $items = array();
 while ($row = $result->fetch_assoc()) {
     $items[] = $row;
