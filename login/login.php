@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     
     if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
     {
-                //ρεαδ φρομ  database
+                //ρεαδ 
             $query = "select * from user where username = '$user_name' ";
        $result =  mysqli_query($con, $query);
        
@@ -22,16 +22,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
                 $user_data = mysqli_fetch_assoc($result);
             
                 if ($user_data["password"] === $password) {
-                    $_SESSION['id'] = $user_data["id"];
+                    $_SESSION['user_id'] = $user_data["user_id"];
                     $_SESSION['user_type'] = $user_data["user_type"]; // Add user type to the session
-            
+                    $_SESSION['location_id'] = $user_data["location_id"];
                     // Redirect based on user type
                     switch ($_SESSION['user_type']) {
                         case 'Admin':
                             header("Location: admin_page.php");
                             break;
                         case 'Rescuer':
-                            header("Location: rescuer_page.php");
+                            header("Location: rescuer_landing_page.php");
                             break;
                         case 'Citizen':
                         default:
