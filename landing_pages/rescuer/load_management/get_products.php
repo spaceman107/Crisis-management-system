@@ -14,7 +14,7 @@ $sql = "SELECT product_id, product_name , quantity FROM product";
 $result = $con->query($sql);
 
 if ($result->num_rows > 0) {
-    // Store the results in an array
+   
     $products = array();
     while($row = $result->fetch_assoc()) {
         $products[] = $row;
