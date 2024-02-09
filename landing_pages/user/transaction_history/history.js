@@ -1,7 +1,6 @@
 $(document).ready(function() {
-    //function to delete a transaction
+    
     function deleteTransaction(transactionId) {
-        //prompt the user for confirmation
         if (confirm("Are you sure you want to cancel this transaction?")) {
             
             $.ajax({
@@ -49,7 +48,7 @@ $(document).ready(function() {
                 tableBody.append(row);
             });
 
-            //event listener for the cancel buttton
+         
             $('.cancel-button').on('click', function() {
                 var transactionId = $(this).closest('tr').find('td:first').text();
                 deleteTransaction(transactionId);
