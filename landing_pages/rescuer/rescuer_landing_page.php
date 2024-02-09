@@ -61,7 +61,7 @@ include("../../../login/functions.php");
     </div>
     <div id="main">
         <!-- Panels -->
-        <div id="stock-management" class="panel">
+        <div id='vehicle-load-management' class="panel">
             <div id="productList"></div>
             <button onclick="showProductsInVehicle()">προιόντα στο όχημα</button>
             <!-- Button to Fetch and Display Products -->
