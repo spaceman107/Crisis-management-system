@@ -21,7 +21,7 @@ logToErrorLog('Product id: ' . $productIds);
 $sql = "INSERT INTO announcement (description) VALUES ('$announcementText')";
 $con->query($sql);
 
-// Get the last inserted announcement_id
+
 $announcementId = $con->insert_id;
 
 // Insert data into the 'announcement_products' table
@@ -32,7 +32,7 @@ foreach ($productIds as $productId) {
 
 $con->close();
 
-// Helper function to log messages to the error log
+
 function logToErrorLog($message) {
     error_log($message);
 }
