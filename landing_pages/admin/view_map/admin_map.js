@@ -1,4 +1,4 @@
-// Define layers for different types of markers
+
 var offerPendingLayer = L.layerGroup();
 var requestpendingLayer = L.layerGroup();
 var requestacceptedLayer = L.layerGroup();
@@ -7,7 +7,7 @@ var vehicleLayer = L.layerGroup();
 var offerAcceptedLayer = L.layerGroup();
 var draggableMarkers = {};
 
-// Create the map and add the tile layer
+
 const map = L.map('map', {
     center: [37.983810, 23.727539],
     zoom: 10,
@@ -19,7 +19,7 @@ const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 
-// Create overlay maps for the layer control
+ol
 const overlays = {
     "ACCEPTED REQUESTS": requestacceptedLayer,
    "PENDING REQUESTS": requestpendingLayer,
@@ -29,7 +29,7 @@ const overlays = {
     "VEHICLES": vehicleLayer
 };
 
-// Add layer control to the map
+
 const layerControl = L.control.layers(null, overlays).addTo(map);
 
 
@@ -191,19 +191,13 @@ fetch('view_map/base_coordinates.php')
                 document.getElementById('lngInput').value = newLatLng.lng;
 
                 if (confirm('Are you sure you want to update the coordinates?')) {
-                    // Retrieve the location_id from the marker property
+                    
                     var locationId = event.target.location_id;
-
-                    // You can use locationId in your logic or send it to the server
                     console.log("Location ID:", locationId);
-
-                    // Set the location_id value in the updateForm
                     document.getElementById('location_id').value = locationId;
-
-                    // Submit the form
                     document.getElementById('updateForm').submit();
                 } else {
-                    // Revert the marker position if the user cancels
+                    
                     event.target.setLatLng(new L.LatLng(document.getElementById('latInput').value, document.getElementById('lngInput').value));
                 }
             });
@@ -221,7 +215,7 @@ fetch('view_map/vehicle_coordinates.php')
     .then(VehicleCoordinates => {
         console.log('VehicleCoordinates:', VehicleCoordinates);
 
-        // Ensure that the map is fully initialized before adding markers
+       
         VehicleCoordinates.forEach(item => {
             var markerVehicle = L.divIcon({
                 html: '<img src="https://www.clipartmax.com/png/middle/196-1961098_car-navigation-maps-for-lovers-of-long-distance-road-google-map-car.png" width="30" height="30" alt="Custom Marker">',
@@ -229,13 +223,13 @@ fetch('view_map/vehicle_coordinates.php')
                 iconSize: [30, 20],
             });
 
-            // Split the comma-separated strings into arrays
+     
             var productNames = item.product_names.split(',');
             var transactionStatuses = item.transaction_statuses.split(',');
             // Create popup content with product names and transaction statuses
             var popupContent = "Vehicle name: " + item.vehicle_name + "<br>";
 
-            // Iterate over the arrays and construct the popup content
+           
             for (var i = 0; i < productNames.length; i++) {
                 var productName = productNames[i].trim(); // Trim to remove leading/trailing spaces
                 var transactionStatus = transactionStatuses[i].trim();
