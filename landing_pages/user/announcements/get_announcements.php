@@ -16,7 +16,7 @@ if (!$result) {
 
 $announcements = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-// Return JSON response
+
 header('Content-Type: application/json');
 echo json_encode($announcements);
 ?>
