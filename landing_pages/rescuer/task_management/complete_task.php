@@ -1,7 +1,7 @@
 <?php
 session_start();
-include("connection.php");
-include("functions.php");
+include("../../../login/connection.php");
+include("../../../login/functions.php");
 
 
 $data = json_decode(file_get_contents('php://input'), true);

@@ -12,6 +12,11 @@ include("connection.php");
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="load_management/stock_management.js"></script>
+    <script src="task_management/task_management.js"></script>
+    <script src="view_map/rescuer_map.js"></script>
+    
     <link rel="stylesheet" type="text/css" href="rescuer.css" />
 </head>
 
@@ -63,7 +68,7 @@ include("connection.php");
             <!-- Button to Execute SQL Query on Selected Products -->
             <button id="myButton" onclick="executeQuery()">φόρτωση</button>
             <button id="myButton1" onclick="unload()">εκφόρτωση</button>
-            <script src="stock_management.js"></script>
+            <script src="load_management/stock_management.js"></script>
         </div>
         <div id="view-map" class="panel">
             <div id="map"></div>
@@ -71,7 +76,7 @@ include("connection.php");
                 <input type="hidden" id="latInput" name="lat" value="">
                 <input type="hidden" id="lngInput" name="lng" value="">
             </form>
-            <script type="text/javascript" src="Rescuer_map.js"></script>
+            <script type="text/javascript" src="view_map/rescuer_map.js"></script>
         </div>
         <div id="task-management" class="panel">
             <!-- Stock View Panel Content -->

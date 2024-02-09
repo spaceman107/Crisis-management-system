@@ -1,7 +1,7 @@
 <?php
 session_start();
-include("connection.php");
-include("functions.php");
+include("../../../login/connection.php");
+include("../../../login/functions.php");
 
 if (isset($_SESSION['user_id'])) {
     $logged_in_user_id = $_SESSION['user_id'];

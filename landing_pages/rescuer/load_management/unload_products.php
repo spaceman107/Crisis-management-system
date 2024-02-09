@@ -1,6 +1,8 @@
 <?php
 session_start();
-include("connection.php");
+include("../../../login/connection.php");
+include("../../../login/functions.php");
+
 $user_id = $_SESSION['user_id'];
 
 $sql1 = "SELECT vehicle_id FROM rescuer WHERE user_id = $user_id";

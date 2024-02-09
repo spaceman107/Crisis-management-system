@@ -1,16 +1,16 @@
 function showProductsInVehicle() {
-    
 
-    fetch('get_products_in_vehicle.php')
+
+    fetch('load_management/get_products_in_vehicle.php')
         .then(response => response.json())
         .then(products => {
             const productList = document.getElementById('productList');
-            productList.innerHTML = "";  // Clear previous content
+            productList.innerHTML = ""; // Clear previous content
 
             if (products.length > 0) {
                 products.forEach(product => {
                     const productName = product.product_name;
-                    
+
 
                     const productInfo = productName;
                     const productElement = document.createElement('p');
@@ -23,30 +23,31 @@ function showProductsInVehicle() {
         })
         .catch(error => console.error('Error:', error));
 }
+
 function unload() {
-fetch('unload_products.php')
-    .then(response => response.json())
-    .then(data => {
-        // Check if the operation was successful
-        if (data.success) {
-            console.log('Products unloaded successfully. Message:', data.message);
-        } else {
-            console.error('Error:', data.error);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+    fetch('load_management/unload_products.php')
+        .then(response => response.json())
+        .then(data => {
+            // Check if the operation was successful
+            if (data.success) {
+                console.log('Products unloaded successfully. Message:', data.message);
+            } else {
+                console.error('Error:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 
 }
 
 function showProducts() {
-    fetch('get_products.php')
+    fetch('load_management/get_products.php')
         .then(response => response.json())
         .then(products => {
             // Assuming there's an element with id "productList" to display products
             const productList = document.getElementById('productList');
-            productList.innerHTML = "";  // Clear previous content
+            productList.innerHTML = ""; // Clear previous content
 
             products.forEach(product => {
                 const checkbox = document.createElement('input');
@@ -58,7 +59,7 @@ function showProducts() {
                 quantityInput.type = 'number';
                 quantityInput.name = 'quantity';
                 quantityInput.value = 0; // Default quantity to 0
-                quantityInput.min = 0;   // Minimum quantity allowed
+                quantityInput.min = 0; // Minimum quantity allowed
 
                 const label = document.createElement('label');
                 label.appendChild(checkbox);
@@ -90,23 +91,23 @@ function executeQuery() {
         selectedProducts.push({ productId, quantity });
     });
 
-    fetch('process_selected_products.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ selectedProducts }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Handle the response from the server if needed
-        console.log(data);
-    })
-    .catch(error => console.error('Error:', error));
+    fetch('load_management/process_selected_products.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ selectedProducts }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response from the server if needed
+            console.log(data);
+        })
+        .catch(error => console.error('Error:', error));
 }
 
 
-fetch('rescuer_coordinates.php')
+fetch('task_management/rescuer_coordinates.php')
     .then(response => response.json())
     .then(RescuerCoordinates => {
         console.log('RescuerCoordinates:', RescuerCoordinates);
@@ -129,7 +130,7 @@ fetch('rescuer_coordinates.php')
     })
     .catch(error => console.error('Error fetching data:', error));
 
-    fetch('base_coordinates.php')
+fetch('view_map/base_coordinates.php')
     .then(response => response.json())
     .then(BaseCoordinates => {
         console.log('BaseCoordinates:', BaseCoordinates);
@@ -141,29 +142,29 @@ fetch('rescuer_coordinates.php')
                 iconSize: [30, 20],
             });
 
-    L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerBase,}).addTo(map).addTo(baseLayer).bindPopup("Base id :" + item.base_id);
-     updateButtonVisibility();
-           
+            L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerBase, }).addTo(map).addTo(baseLayer).bindPopup("Base id :" + item.base_id);
+            updateButtonVisibility();
 
-            
+
+
         });
     })
     .catch(error => console.error('Error fetching data:', error));
 
-    
-    function updateButtonVisibility() {
-        const rescuerMarker = RescuerLayer.getLayers()[0]; 
-        const baseMarker = baseLayer.getLayers()[0]; 
-        const button = document.getElementById('myButton');
-    
-        if (rescuerMarker && baseMarker) {
-            const distance = rescuerMarker.getLatLng().distanceTo(baseMarker.getLatLng());
-    
-            if (distance < 100) {
-                button.style.display = 'block';
-                return;
-            }
+
+function updateButtonVisibility() {
+    const rescuerMarker = RescuerLayer.getLayers()[0];
+    const baseMarker = baseLayer.getLayers()[0];
+    const button = document.getElementById('myButton');
+
+    if (rescuerMarker && baseMarker) {
+        const distance = rescuerMarker.getLatLng().distanceTo(baseMarker.getLatLng());
+
+        if (distance < 100) {
+            button.style.display = 'block';
+            return;
         }
-    
-        button.style.display = 'none';
     }
+
+    button.style.display = 'none';
+}

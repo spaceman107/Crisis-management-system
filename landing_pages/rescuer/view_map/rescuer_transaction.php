@@ -1,6 +1,7 @@
 <?php
 session_start();
-include("connection.php");
+include("../../../login/connection.php");
+include("../../../login/functions.php");
 $userID = $_SESSION['user_id'];
 // Check if it's a POST request
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

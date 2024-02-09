@@ -1,6 +1,7 @@
 <?php
 session_start();
-include("connection.php");
+include("../../../login/connection.php");
+include("../../../login/functions.php");
 
 // Check if the required parameters are set
 if (isset($_POST['lat'], $_POST['lng'])) {

@@ -1,7 +1,7 @@
 <?php
 session_start();
-include("connection.php");
-include("functions.php");
+include("../../../login/connection.php");
+include("../../../login/functions.php");
 // Assuming $con is your database connection
 $OfferCoordinatesQuery = "SELECT x_coordinate AS lat, y_coordinate AS lng, 
 user.first_name,
