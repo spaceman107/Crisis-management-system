@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['json_local'])) {
     $file_type = $_FILES['json_local']['type'];
 
     if ($file_type === 'application/json') {
-        // Move uploaded JSON file to a location
+   
         $target_directory = "uploads/";
         $target_file = $target_directory . basename($file_name);
 
