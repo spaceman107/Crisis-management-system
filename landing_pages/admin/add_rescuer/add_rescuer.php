@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
                       VALUES ('$user_name', '$password', 'Rescuer', '$first_name', '$last_name', '$phone', '$location_id')";
  $result = mysqli_query($con, $query);
  if ($result) {
-    // Success response
+    
     $response = array('status' => 'success', 'message' => 'Rescuer Added');
     echo json_encode($response);
 } else {
@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     echo json_encode($response);
 }
 } else {
-// Invalid or missing parameters
+
 $response = array('status' => 'error', 'message' => 'Invalid or missing parameters');
 echo json_encode($response);
 }
