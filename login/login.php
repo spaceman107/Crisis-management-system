@@ -28,14 +28,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
                     // Redirect based on user type
                     switch ($_SESSION['user_type']) {
                         case 'Admin':
-                            header("Location: admin_page.php");
+                            header("Location: ../landing_pages/admin/admin_landing_page.php");
                             break;
                         case 'Rescuer':
-                            header("Location: rescuer_landing_page.php");
+                            header("Location: ../landing_pages/rescuer/rescuer_landing_page.php");
                             break;
                         case 'Citizen':
                         default:
-                            header("Location: user_page.php");
+                            header("Location: ../landing_pages/user/user_landing_page.html");
                             break;
                     }
                     die;
