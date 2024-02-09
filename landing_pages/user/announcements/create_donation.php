@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $selectedProducts = $_POST['products'];
     $quantities = $_POST['quantities'];
 
-    // looping through the arrays
+
     for ($i = 0; $i < count($selectedProducts); $i++) {
         $product = $selectedProducts[$i];
         $quantity = $quantities[$i];
