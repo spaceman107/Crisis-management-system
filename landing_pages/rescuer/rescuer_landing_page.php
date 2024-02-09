@@ -79,10 +79,16 @@ include("../../../login/functions.php");
             </form>
             <script type="text/javascript" src="view_map/rescuer_map.js"></script>
         </div>
-        <div id="task-management" class="panel">
-            <!-- Stock View Panel Content -->
+           <div id="task-management" class="panel">
+        <div id="map1"></div>
+        <ul id="taskList"></ul>
+       
+
+<script src="task_management.js" ></script>
         </div>
+       
     </div>
+    
 </body>
 
 </html>
