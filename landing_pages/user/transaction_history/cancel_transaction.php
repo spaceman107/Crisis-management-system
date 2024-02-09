@@ -2,7 +2,7 @@
 session_start();
 include("../../../login/connection.php");
 
-//check if the request method is POST
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $transactionId = $_POST['transactionId'];
