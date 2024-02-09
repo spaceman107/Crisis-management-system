@@ -2,10 +2,10 @@
 include 'connection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Predefined JSON URL
+    
     $json_url = 'http://usidas.ceid.upatras.gr/web/2023/export.php'; // Replace with your JSON URL
     
-    // Fetch JSON data from the predefined URL
+   
     $json_data = file_get_contents($json_url);
 
     if ($json_data !== false) {
@@ -25,15 +25,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $id = $item['id'];
             $name = $item['name'];
             $category = $item['category'];
-            // Create a variable to hold concatenated details
+    
             $concatenated_details = '';
 
-            // Concatenate details if available
+          
             foreach ($item['details'] as $detail) {
                 $concatenated_details .= $detail['detail_name'] . ': ' . $detail['detail_value'] . ', ';
             }
 
-            // Remove the trailing comma and space
             $concatenated_details = rtrim($concatenated_details, ', ');
             $sql = "INSERT INTO product (product_id, quantity, product_category, details, product_name) VALUES ('$id', NULL, '$category', '$concatenated_details', '$name') ";
             mysqli_query($con, $sql);
