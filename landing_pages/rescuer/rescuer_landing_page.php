@@ -47,7 +47,7 @@ include("../../../login/functions.php");
     <header>
         <h2>Rescuer Dashboard</h2>
         <button class="openbtn" onclick="openNav()">&#9776; Open Sidebar</button>
-        <a class="logout-btn" href="#">Logout</a>
+        <a class="logout-btn" href="../login/logout.php>Logout</a>
     </header>
     <div id="mySidebar" class="sidebar">
         <nav>
