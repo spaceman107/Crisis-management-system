@@ -23,7 +23,7 @@ include("../../login/connection.php");
     <header>
         <button class="openbtn" onclick="openNav()">&#9776; Open Sidebar</button>
         <h2>Admin Dashboard</h2>
-        <a class="logout-btn" href="#">Logout</a>
+        <a class="logout-btn" href="../login/logout.php">Logout</a>
     </header>
     <div id="mySidebar" class="sidebar">
         <nav>
