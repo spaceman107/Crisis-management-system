@@ -1,11 +1,11 @@
 $(document).ready(function() {
-    //AJAX request to get announcements from the server
+    
     $.ajax({
         url: 'announcements/get_announcements.php',
         type: 'GET',
         dataType: 'json',
         success: function(data) {
-            //pass through each announcement
+        
             data.forEach(function (announcement) {
                 var announcementCard = $('<div class="announcement-card"></div>');
                 announcementCard.append('<h2>Announcement</h2>');
