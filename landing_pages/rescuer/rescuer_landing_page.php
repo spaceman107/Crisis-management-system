@@ -1,6 +1,7 @@
 <?php
 session_start();
-include("connection.php");
+include("../../../login/connection.php");
+include("../../../login/functions.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
