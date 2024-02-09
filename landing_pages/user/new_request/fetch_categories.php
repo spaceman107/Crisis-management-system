@@ -1,19 +1,6 @@
 <?php
-
-
-error_reporting(E_ALL);
-    ini_set('display_errors', '1');
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "";
-$dbname = "crisis management";
-
-// Create connection
-$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+session_start();
+include("../../../login/connection.php");
 }
 
 // Fetch category names from the database
@@ -25,10 +12,10 @@ if (!$result) {
     die("Error: " . mysqli_error($conn));
 }
 
-// Fetch data as an associative array
+//save associative array
 $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-// Return the categories as JSON
+//return the categories as JSON
 header('Content-Type: application/json');
 echo json_encode($categories);
 
