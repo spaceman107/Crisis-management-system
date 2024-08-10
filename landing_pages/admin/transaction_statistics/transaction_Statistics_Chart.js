@@ -1,4 +1,4 @@
-  function fetchAndUpdateChart() {
+function fetchAndUpdateChart() {
   
     const startMonth = document.getElementById('startMonth').value;
     const startYear = document.getElementById('startYear').value;
@@ -7,28 +7,28 @@
     const endYear = document.getElementById('endYear').value;
  
  
-    fetch(`NewRequests.php?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear}`)
+    fetch(`transaction_statistics/NewRequests.php?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear}`)
        .then(response => response.json())
        .then(data => {
          const labelsRequests = data.map(entry => `${entry.year}-${entry.monthname}`);
          const amountsRequests = data.map(entry => entry.amount);
 
      
-    fetch(`NewOffers.php?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear}`)
+    fetch(`transaction_statistics/NewOffers.php?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear}`)
         .then(response => response.json())
         .then(OfferData => {
           const labelsOffers = OfferData.map(entry => `${entry.year}-${entry.monthname}`);
           const amountsOffers = OfferData.map(entry => entry.amount);
 
        
-    fetch(`CompletedOffers.php?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear}`)
+    fetch(`transaction_statistics/CompletedOffers.php?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear}`)
         .then(response => response.json())
         .then(CompletedOfferData => {
             const labelsCompletedOffers = CompletedOfferData.map(entry => `${entry.year}-${entry.monthname}`);
             const amountsCompletedOffers = CompletedOfferData.map(entry => entry.amount);
 
             
-    fetch(`CompletedRequest.php?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear}`)
+    fetch(`transaction_statistics/CompletedRequest.php?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear}`)
         .then(response => response.json())
         .then(CompletedRequestData => {
             const labelsCompletedRequest = CompletedRequestData.map(entry => `${entry.year}-${entry.monthname}`);
