@@ -45,7 +45,7 @@ function rescuer_transaction(userId, transactionId) {
     console.log('Transaction ID:', transactionId);
 
     // Execute your SQL query when the marker is clicked
-    fetch('rescuer_transaction.php', {
+    fetch('view_map/rescuer_transaction.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ function rescuer_transaction(userId, transactionId) {
 }
 
 
-fetch('offer_coordinates.php')
+fetch('view_map/offer_coordinates.php')
     .then(response => response.json())
     .then(OfferCoordinates => {
         console.log(OfferCoordinates);
@@ -94,7 +94,7 @@ fetch('offer_coordinates.php')
    
 ///REQUEST PENDING COORDINATES
 
-fetch('request_coordinates_pending.php')
+fetch('view_map/request_coordinates_pending.php')
     .then(response => response.json())
     .then(RequestCoordinates => {
         console.log(RequestCoordinates);
@@ -134,7 +134,7 @@ fetch('request_coordinates_pending.php')
 
 /// BASE COORDINATES
 
-fetch('base_coordinates.php')
+fetch('view_map/base_coordinates.php')
     .then(response => response.json())
     .then(BaseCoordinates => {
         console.log('BaseCoordinates:', BaseCoordinates);
@@ -157,7 +157,7 @@ fetch('base_coordinates.php')
 
 
     function updateCoordinates(lat, lng) {
-        fetch('rescuer_update_coordinates.php', {
+        fetch('view_map/rescuer_update_coordinates.php', {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -191,7 +191,7 @@ fetch('base_coordinates.php')
 
     /// RESCUER COORDINATES
     
-   fetch('rescuer_coordinates.php')
+   fetch('view_map/rescuer_coordinates.php')
     .then(response => response.json())
     .then(RescuerCoordinates => {
         console.log('RescuerCoordinates:', RescuerCoordinates);
@@ -236,7 +236,7 @@ fetch('base_coordinates.php')
    
   ///HIS REQUEST  COORDINATES
 
-fetch('Request_Coordinates_Himself.php')
+fetch('view_map/Request_Coordinates_Himself.php')
 .then(response => response.json())
 .then(RequestAcceptedCoordinates => {
     console.log('RequestAcceptedCoordinates:', RequestAcceptedCoordinates);
@@ -273,7 +273,7 @@ fetch('Request_Coordinates_Himself.php')
 
 
 
-fetch('offer_coordinates_himself.php')
+fetch('view_map/offer_coordinates_himself.php')
 .then(response => response.json())
 .then(OfferHimselfCoordinates => {
     console.log(OfferHimselfCoordinates);

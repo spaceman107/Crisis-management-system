@@ -1,11 +1,12 @@
 <?php
 session_start();
 include("../../../login/connection.php");
-include("../../../login/functions.php");
 
+// Check if the user is logged in
 if (isset($_SESSION['user_id'])) {
     $logged_in_user_id = $_SESSION['user_id'];
 
+    // Assuming $con is your database connection
     $TaskCoordinatesQuery = "
     SELECT x_coordinate AS lat, y_coordinate AS lng ,   
 user.first_name ,
@@ -43,6 +44,7 @@ transaction.quantity
     header('Content-Type: application/json');
     echo json_encode($TaskHimselfCoordinates);
 } else {
+    // Handle the case where the user is not logged in
     header('Content-Type: application/json');
     echo json_encode(['error' => 'User not logged in']);
 }

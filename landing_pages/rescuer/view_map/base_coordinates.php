@@ -1,8 +1,6 @@
 <?php
 session_start();
 include("../../../login/connection.php");
-include("../../../login/functions.php");
-
 
 // COORDINATES FOR BASE (PINS)
 $BaseCoordinatesQuery = "SELECT base.base_id, location.x_coordinate AS lat, location.y_coordinate AS lng , location.location_id 

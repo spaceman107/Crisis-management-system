@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("../../../login/connection.php");
-include("../../../login/functions.php");
+
 
 // COORDINATES FOR USER REQUEST (PINS)
 

@@ -23,36 +23,27 @@ header {
     background-color: darkred;
 }
 
-/*hide all the other panels*/
+/* Hide all panels by default */
 .panel {
     display: none;
 }
 
-#load-management {
+#vehicle-load-management {
     display: block;
-    /* Show the Stock Management panel by default */
 }
 
 /* The sidebar menu */
 .sidebar {
-    height: 100%;
-    /* 100% Full-height */
-    width: 0;
-    /* 0 width - change this with JavaScript */
-    position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Stay on top */
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
     top: 0;
     left: 0;
-    background-color: #111;
-    /* Black*/
-    overflow-x: hidden;
-    /* Disable horizontal scroll */
-    padding-top: 60px;
-    /* Place content 60px from the top */
-    transition: 0.5s;
-    /* 0.5 second transition effect to slide in the sidebar */
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
 }
 
 /* The sidebar links */
@@ -65,21 +56,15 @@ header {
     transition: 0.3s;
 }
 
-/* When you mouse over the navigation links, change their color */
 .sidebar a:hover {
     color: #f1f1f1;
 }
 
 .sidebar ul {
-    list-style-type: none;
-}
-
-.sidebar nav ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
     margin: 0;
 }
-
 
 /* Position and style the close button (top right corner) */
 .sidebar .closebtn {
@@ -106,8 +91,7 @@ header {
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
-    transition: margin-left .5s;
-    /* If you want a transition effect */
+    transition: margin-left .5s; /* If you want a transition effect */
     padding: 20px;
 }
 
@@ -116,10 +100,16 @@ header {
     padding-bottom: 5px;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
+
+.stock-mng {
+    background-color: darkslateblue;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
 
 /******************/
 /* View Map Panel */
@@ -130,14 +120,12 @@ ul {
     height: 500px;
 }
 
-
-
-
 /******************/
-/*Stock View Panel*/
+/* Stock View Panel */
 /******************/
 label {
-    margin-right: 10px;
+    display: block;
+/*    margin-bottom: 8px;*/
 }
 
 #categories-dropdown {
@@ -166,12 +154,18 @@ label {
     background-color: #f5f5f5;
 }
 
-/*******************/
-/*Add rescuer panel*/
-/*******************/
+.scrollable {
+    width: 800px;  /*Set the width of the div */
+    height: 600px; /* Set the height of the div */
+    overflow: auto; /* Enable scrolling */
+    border: 1px solid #ccc;  /* Optional: Add a border */
+    padding: 10px; /* Optional: Add some padding */
+    margin: 15px;
+}
 
-/*somethhing affects view map layer control*/
-
+/*******************/
+/* Add rescuer panel */
+/*******************/
 form {
     max-width: 400px;
     margin: 20px auto;
@@ -180,16 +174,11 @@ form {
     border-radius: 5px;
 }
 
-label {
-    display: block;
-    margin-bottom: 8px;
-}
-
 input {
-    width: 100%;
     padding: 8px;
+    /*width: 100%;
     margin-bottom: 16px;
-    box-sizing: border-box;
+    box-sizing: border-box;*/
 }
 
 input[type="submit"] {
@@ -202,9 +191,13 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: darkslateblue;
+    background-color: #483d8b; /* Changed to a different color on hover */
 }
 
+/*input[type="checkbox"] {
+    width: 2%;
+}
+*/
 form select {
     padding: 8px;
     margin: 5px 0 15px;
@@ -214,13 +207,12 @@ form select {
 }
 
 #map1 {
-    height: 200px;
+    height: 400px;
     width: 100%;
     margin-top: 16px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {

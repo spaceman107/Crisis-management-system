@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("../../../login/connection.php");
-include("../../../login/functions.php");
 
 $RequestCoordinatesQuery = " SELECT x_coordinate AS lat, y_coordinate AS lng ,user.user_id   ,
 user.first_name ,
