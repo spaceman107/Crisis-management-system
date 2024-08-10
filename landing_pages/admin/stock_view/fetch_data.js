@@ -60,8 +60,9 @@ $(document).ready(function () {
                         '<td>' + entry.quantity + '</td>' +
                         '<td>' + entry.category + '</td>' +
                         '<td>' + entry.details + '</td>' +
-                        '<td>' + entry.name + '</td>' +
+                        '<td>' + entry.product_name + '</td>' +
                         '<td>' + entry.total_quantity_in_transactions + '</td>' +
+                        '<td>' + entry.availability + '</td>' +
                         '</tr>');
                 });
             },

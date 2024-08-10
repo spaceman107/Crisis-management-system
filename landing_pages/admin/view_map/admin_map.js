@@ -19,7 +19,7 @@ const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 
-ol
+
 const overlays = {
     "ACCEPTED REQUESTS": requestacceptedLayer,
    "PENDING REQUESTS": requestpendingLayer,

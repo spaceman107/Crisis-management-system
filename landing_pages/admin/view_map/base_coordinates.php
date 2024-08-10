@@ -1,6 +1,6 @@
 <?PHP
 session_start();
-include("../../login/connection.php");
+include("../../../login/connection.php");
 
 error_reporting(E_ALL);
 ini_set('display_errors', '1');

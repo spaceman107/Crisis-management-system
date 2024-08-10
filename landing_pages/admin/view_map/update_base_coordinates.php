@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("connection.php");
+include("../../../login/connection.php");
 
 
 if (isset($_POST['locationId'], $_POST['lat'], $_POST['lng'])) {
@@ -32,7 +32,7 @@ if (isset($_POST['locationId'], $_POST['lat'], $_POST['lng'])) {
     mysqli_stmt_close($stmt);
 
 
-    header("Location: admin_page.php");
+    header("Location: ../admin_landing_page.php");
 } else {
 
     $response = array('status' => 'error', 'message' => 'Invalid or missing parameters');

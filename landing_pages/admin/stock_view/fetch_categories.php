@@ -1,6 +1,6 @@
 <?php
-session_start();
 include("../../../login/connection.php");
+
 
 
 $sql = "SELECT * FROM product_type";

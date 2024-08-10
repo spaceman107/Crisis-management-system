@@ -1,5 +1,5 @@
 <?php
-include 'connection.php';
+include("../../../login/connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['json_local'])) {
     $file_name = $_FILES['json_local']['name'];

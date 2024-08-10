@@ -23,7 +23,7 @@ include("../../login/connection.php");
     <header>
         <button class="openbtn" onclick="openNav()">&#9776; Open Sidebar</button>
         <h2>Admin Dashboard</h2>
-        <a class="logout-btn" href="../login/logout.php">Logout</a>
+        <a class="logout-btn" href="../../login/logout.php">Logout</a>
     </header>
     <div id="mySidebar" class="sidebar">
         <nav>
@@ -45,25 +45,26 @@ include("../../login/connection.php");
             <h3>Load product description from json file</h3>
             <ul>
                 <li>
-                    <form action="json_usidas.php" method="post" class="json-fetch-data">
+                    <form action="stock_management/json_usidas.php" method="post" class="json-fetch-data">
                         <input type="submit" name="fetch_json_usidas" value="Json from Usidas">
                     </form>
                 </li>
                 <li>
-                    <form action="json_local.php" method="post" enctype="multipart/form-data" class="json-fetch-data">
+                    <form action="stock_management/json_local.php" method="post" enctype="multipart/form-data" class="json-fetch-data">
                         <input type="file" name="json_local" accept=".json" required>
                         <br>
                         <input type="submit" name="fetch_json_local" value="Upload local json file">
                     </form>
                 </li>
             </ul>
-             <h2>Choose Item Category</h2>
-                <select id="categorySelect">
-                    <!-- Categories will be dynamically loaded here -->
-                </select>
+             <h2>Change Item Availability</h2>
             
                 <form id="itemsForm" onsubmit="submitForm(event)" method="POST">
-                    <h2>Choose Items for Transport</h2>
+                    <label>Choose Item Category</label>
+                    <select id="categorySelect">
+                        <!-- Categories will be dynamically loaded here -->
+                    </select>
+                    <hr width="100%" size="1" color="black" noshade>
                     <div id="itemsContainer"></div>
                    <button type="submit" id="submitButton">Make Items Available for Transport</button>
                 </form>
@@ -77,12 +78,14 @@ include("../../login/connection.php");
          <div id="view-map" class="panel">
             <h2>View Map Panel</h2>
             <div id="map"></div>
-            <form id="updateForm" action="update_base_coordinates.php" method="post">
+            <script type="text/javascript" src="view_map/admin_map.js"></script>
+
+            <form id="updateForm" action="view_map/update_base_coordinates.php" method="post">
         <input type="hidden" id="latInput" name="lat" value="">
        <input type="hidden" id="lngInput" name="lng" value="">
        <input type="hidden" id="location_id" name="locationId" value="">
              </form>
-            <script type="text/javascript" src="Admin_map.js"></script>
+
         </div>
         <div id="stock-view" class="panel">
             <h2>Stock View Panel</h2>
@@ -97,6 +100,7 @@ include("../../login/connection.php");
                         <th>Details</th>
                         <th>Name</th>
                         <th>Quantity for tranfer</th>
+                        <th>Available</th>
                     </tr>
                 </thead>
                 <tbody id="tBody"></tbody>
@@ -107,7 +111,7 @@ include("../../login/connection.php");
             <div style="width: 700px;">
                 <canvas id="myChart"></canvas>
             </div>
-            <script type="text/javascript" src="transaction statistics/transaction_Statistics_Chart.js"></script>
+            <script type="text/javascript" src="transaction_statistics/transaction_Statistics_Chart.js"></script>
             <form>
             <label for="startMonth">Start Month:</label>
                 <select id="startMonth">
@@ -124,8 +128,10 @@ include("../../login/connection.php");
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
+                </br>
                 <label for="startYear">Start Year:</label>
                 <input type="text" id="startYear" placeholder="YYYY">
+                <hr width="100%" size="1" color="black" noshade>
                 <label for="endMonth">End Month:</label>
                 <select id="endMonth">
                     <option value="1">January</option>
@@ -141,9 +147,10 @@ include("../../login/connection.php");
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
+                </br>
                 <label for="endYear">End Year:</label>
                 <input type="text" id="endYear" placeholder="YYYY">
-                <button onclick="fetchAndUpdateChart()">Update Chart</button>
+                <button type="submit" onclick="fetchAndUpdateChart()">Update Chart</button>
             </form>
         </div>
         <div id="add-rescuer" class="panel">
@@ -200,7 +207,8 @@ include("../../login/connection.php");
                 <textarea id="announcementText" name="announcementText" rows="5" cols="55"></textarea>
                 <label for="announcementProducts">Announcement Products:</label>
                 <input type="text" id="announcementProducts" name="announcementProducts">
-                <button type="submit" onclick="submitForm()">Submit Announcement</button>
+                
+                <button type="button" onclick="submitAnnouncement()">Submit Announcement</button>
                 <script src="create_announcement/create_announcement.js"></script>
             </form>
         </div>

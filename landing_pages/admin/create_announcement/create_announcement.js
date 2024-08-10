@@ -1,6 +1,17 @@
-function submitForm() {
+function submitAnnouncement() {
     var announcementText = document.getElementById('announcementText').value;
     var announcementProducts = document.getElementById('announcementProducts').value;
+
+    if (!announcementText || announcementText.trim() === '') {
+        alert('Announcement text is required.');
+        return;
+    }
+
+    if (!announcementProducts || announcementProducts.trim() === '') {
+        alert('Product IDs are required.');
+        return;
+    }
+
 
     // Split the product IDs into an array
     var productIds = announcementProducts.split(',');
