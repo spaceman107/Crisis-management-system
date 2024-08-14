@@ -202,13 +202,12 @@ include("../../login/connection.php");
         </div>
         <div id="create-announcement" class="panel">
             <h2>Create Announcement Panel</h2>
-            <form>
+           form>
                 <label for="announcementText">Announcement Text:</label>
                 <textarea id="announcementText" name="announcementText" rows="5" cols="55"></textarea>
                 <label for="announcementProducts">Announcement Products:</label>
                 <input type="text" id="announcementProducts" name="announcementProducts">
-                
-                <button type="button" onclick="submitAnnouncement()">Submit Announcement</button>
+                <button type="submit" onclick="submitForm()">Submit Announcement</button>
                 <script src="create_announcement/create_announcement.js"></script>
             </form>
         </div>
