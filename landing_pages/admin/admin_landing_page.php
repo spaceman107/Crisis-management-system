@@ -207,7 +207,7 @@ include("../../login/connection.php");
                 <textarea id="announcementText" name="announcementText" rows="5" cols="55"></textarea>
                 <label for="announcementProducts">Announcement Products:</label>
                 <input type="text" id="announcementProducts" name="announcementProducts">
-                <button type="submit" onclick="submitForm()">Submit Announcement</button>
+                <button type="submit" onclick="submitAnnouncement()">Submit Announcement</button>
                 <script src="create_announcement/create_announcement.js"></script>
             </form>
         </div>
