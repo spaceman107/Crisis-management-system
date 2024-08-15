@@ -13,16 +13,15 @@ function submitAnnouncement() {
     }
 
 
-    // Split the product IDs into an array
+    //add product ids to array
     var productIds = announcementProducts.split(',');
 
-    // Create an object to send as JSON to the server
+    //create an object to send as JSON to the server
     var data = {
         announcementText: announcementText,
         productIds: productIds
     };
 
-    // Use Fetch API to send data to the server
     fetch('create_announcement/insert_announcement.php', {
         method: 'POST',
         headers: {
@@ -30,13 +29,20 @@ function submitAnnouncement() {
         },
         body: JSON.stringify(data)
     })
-    .then(response => response.json())
-    .then(result => {
-        // Handle the server response if needed
-        console.log(result);
+    .then(response => {
+        if (response.ok) {
+            alert('Announcement successfully created!');
+            console.log('Announcement successfully created.');
+
+            //clear text fields
+            document.getElementById('announcementText').value = '';
+            document.getElementById('announcementProducts').value = '';
+        } else {
+            alert('Failed to create announcement.');
+            console.error('Failed to create announcement.');
+        }
     })
     .catch(error => {
-        // Handle errors
         console.error('Error:', error);
     });
 }

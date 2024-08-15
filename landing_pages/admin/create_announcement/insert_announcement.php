@@ -17,17 +17,18 @@ $data = json_decode(file_get_contents('php://input'), true);
 $announcementText =$data['announcementText'];
 $productIds = $data['productIds'];
 logToErrorLog('Product id: ' . $productIds);
-// Insert data into the 'announcement' table
+
 $sql = "INSERT INTO announcement (description) VALUES ('$announcementText')";
 $con->query($sql);
 
-
+//get last id after insertion
 $announcementId = $con->insert_id;
 
-// Insert data into the 'announcement_products' table
+
 foreach ($productIds as $productId) {
     $sql = "INSERT INTO announcement_products (announcement_id, product_id) VALUES ('$announcementId', '$productId')";
     $con->query($sql);
+echo json_encode(['status' => 'success']);
 }
 
 $con->close();
