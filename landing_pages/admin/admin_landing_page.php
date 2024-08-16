@@ -110,9 +110,9 @@ include("../../login/connection.php");
             <h2>Transactions Statistics Panel</h2>
             <div style="width: 700px;">
                 <canvas id="myChart"></canvas>
-            </div>
+           </div>
             <script type="text/javascript" src="transaction_statistics/transaction_Statistics_Chart.js"></script>
-            <form>
+            
             <label for="startMonth">Start Month:</label>
                 <select id="startMonth">
                     <option value="1">January</option>
@@ -151,7 +151,7 @@ include("../../login/connection.php");
                 <label for="endYear">End Year:</label>
                 <input type="text" id="endYear" placeholder="YYYY">
                 <button type="submit" onclick="fetchAndUpdateChart()">Update Chart</button>
-            </form>
+            
         </div>
         <div id="add-rescuer" class="panel">
             <h2>Add Rescuer Panel</h2>
