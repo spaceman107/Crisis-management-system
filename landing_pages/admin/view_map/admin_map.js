@@ -45,12 +45,16 @@ fetch('view_map/offer_coordinates.php')
                 iconSize: [30, 20],
             });
 
-            L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerOffer }).addTo(map).addTo(offerPendingLayer).bindPopup("Offer.");
+            L.marker([parseFloat(item.lat), parseFloat(item.lng)], { icon: markerOffer }).addTo(map).addTo(offerPendingLayer).bindPopup(
+                "User Fullname: " + item.first_name + " " + item.last_name +
+                "<br>Phone: " + item.phone +
+                "<br>Time of Submission: " + item.time_of_submition +
+                "<br>Product Category: " + item.name_category 
+                );;
 
         });
     })
     .catch(error => console.error('Error fetching data:', error));
-
 /////////
 
     fetch('view_map/accepted_offer_coordinates.php')
