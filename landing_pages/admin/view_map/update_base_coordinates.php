@@ -4,7 +4,7 @@ include("../../../login/connection.php");
 
 
 if (isset($_POST['locationId'], $_POST['lat'], $_POST['lng'])) {
-    // Sanitize and retrieve the parameters
+    // Retrieve the parameters
     $locationId = $_POST['locationId']; // Convert to integer
     $lat = $_POST['lat'];
     $lng = $_POST['lng'];
