@@ -139,7 +139,6 @@ async function loadCategories() {
     
             if (result.success) {
                 console.log('Items marked as available successfully.');
-                // Additional logic if needed
             } else {
                 console.error('Error marking items as available:', result.error);
             }
