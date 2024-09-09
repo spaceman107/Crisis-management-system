@@ -3,7 +3,7 @@ include("../../../login/connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $json_url = 'http://usidas.ceid.upatras.gr/web/2023/export.php'; // Replace with your JSON URL
+    $json_url = 'http://usidas.ceid.upatras.gr/web/2023/export.php'; 
     
    
     $json_data = file_get_contents($json_url);
