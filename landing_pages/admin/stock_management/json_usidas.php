@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql = "INSERT INTO product (product_id, quantity, product_category, details, product_name) VALUES ('$id', NULL, '$category', '$concatenated_details', '$name') ";
             mysqli_query($con, $sql);
         }
-            header("Location:../admin_landing_page.php");
+            header("Location:admin_landing_page.php");
     }
 }
 
