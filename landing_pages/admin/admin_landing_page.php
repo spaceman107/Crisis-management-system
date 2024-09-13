@@ -202,7 +202,7 @@ include("../../login/connection.php");
         </div>
         <div id="create-announcement" class="panel">
             <h2>Create Announcement Panel</h2>
-           form>
+           <form>
                 <label for="announcementText">Announcement Text:</label>
                 <textarea id="announcementText" name="announcementText" rows="5" cols="55"></textarea>
                 <label for="announcementProducts">Announcement Products:</label>
