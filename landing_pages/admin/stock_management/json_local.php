@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['json_local'])) {
 
     if ($file_type === 'application/json') {
         // Move uploaded JSON file to a location
-        $target_directory = "C:/xampp/htdocs/web project/landing_pages/admin/stock_management/";
+        $target_directory = "stock_management";
         $target_file = $target_directory . basename($file_name);
 
         if (move_uploaded_file($file_tmp, $target_file)) {
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['json_local'])) {
                     $sql = "INSERT INTO product (product_id, quantity, product_category, details, product_name) VALUES ('$id', NULL, '$category', '$concatenated_details', '$name') ";
                     mysqli_query($con, $sql);
                 }
-                    header("Location:landing_pages/admin/admin_landing_page.php");
+                    header("Location:admin_landing_page.php");
             }
         }
     }
