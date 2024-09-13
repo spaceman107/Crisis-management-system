@@ -7,8 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['json_local'])) {
     $file_type = $_FILES['json_local']['type'];
 
     if ($file_type === 'application/json') {
-   
-        $target_directory = "uploads/";
+        // Move uploaded JSON file to a location
+        $target_directory = "C:/xampp/htdocs/web project/landing_pages/admin/stock_management/";
         $target_file = $target_directory . basename($file_name);
 
         if (move_uploaded_file($file_tmp, $target_file)) {
@@ -19,19 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['json_local'])) {
                 // Decode JSON data into an associative array
                 $data = json_decode($json_data, true);
         
-                foreach ($data['items'] as $item) {
-                    $id = $item['id'];
-                    $name = $item['name'];
-                    $category = $item['category'];
-                   
-                    foreach ($item['details'] as $detail) {
-                        $details = $detail['details'];
-                    }
-        
-                    $sql = "INSERT INTO product (product_id, quantity, product_category, details, name) VALUES ('$id', NULL, '$category', '$details', '$name') ";
-                    mysqli_query($con, $sql);
-                }
-        
                 foreach ($data['categories'] as $category) {
                     $cat_id = $category['id'];
                     $cat_name = $category['category_name'];
@@ -40,9 +27,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['json_local'])) {
                     mysqli_query($con, $query);
         
                 }
+        
+                foreach ($data['items'] as $item) {
+                    $id = $item['id'];
+                    $name = $item['name'];
+                    $category = $item['category'];
+                    // Create a variable to hold concatenated details
+                    $concatenated_details = '';
+        
+                    // Concatenate details if available
+                    foreach ($item['details'] as $detail) {
+                        $concatenated_details .= $detail['detail_name'] . ': ' . $detail['detail_value'] . ', ';
+                    }
+        
+                    // Remove the trailing comma and space
+                    $concatenated_details = rtrim($concatenated_details, ', ');
+                    $sql = "INSERT INTO product (product_id, quantity, product_category, details, product_name) VALUES ('$id', NULL, '$category', '$concatenated_details', '$name') ";
+                    mysqli_query($con, $sql);
+                }
+                    header("Location:landing_pages/admin/admin_landing_page.php");
             }
         }
     }
 }
-        
-        ?>
+    ?>
