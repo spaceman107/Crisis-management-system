@@ -55,39 +55,39 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
-   <style>
-    #map { height: 350px; }
-   </style>
+   
 
 </head>
 <body>
 
-<head1><h1>ΦΟΡΜΑ ΠΑΡΟΧΗΣ ΒΟΗΘΕΙΑΣ</h1></head1>
-<head1><h2>SIGN UP</h2></head1>
+<div class="form-container">
+
+        <h1 class="form-heading">Crisis Management System</h1>
+        <h2 class="form-subheading">Signup</h2>
 <form method="post">                                      <!--form-->
-        <label for="user_name">Username:</label><br>
-        <input type="text" id="user_name" name="user_name" required><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br>
-        <label for="first_name">First Name:</label><br>
-        <input type="text" id="first_name" name="first_name" required><br>
-        <label for="last_name">Last Name:</label><br>
-        <input type="text" id="last_name" name="last_name" required><br>
-        <label for="phone">Phone:</label><br>
-        <input type="text" id="phone" name="phone" required><br>
+        <label for="user_name">Username:</label>
+        <input type="text" id="user_name" name="user_name" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required>
         
         <input type="hidden" id="latitude" name="latitude">
         <input type="hidden" id="longitude" name="longitude">
+        <label>Click your location on the map:</label>
+        <div id="map"></div><br>
 
-        <input type="submit" value="Signup" name="submit"><br><br>
+        <input type="submit" value="Signup" name="submit"><br>
      
-        <a href="login.php">Click to login</a><br><br>  
+        <a href="login.php">Click to login</a><br>
     </form>
   
-    <div id="map">
-   
-
-    </div>
+    
+</div>
  
 
 </body>
