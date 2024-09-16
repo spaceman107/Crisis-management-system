@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+     
     $.ajax({
         url: 'new_request/fetch_categories.php',
         method: 'GET',
@@ -15,7 +16,11 @@ $(document).ready(function () {
                 );
             });
 
-   
+            let categoriesData = [];
+            categoriesData = data;
+            initAutocomplete(categoriesData);
+
+
             loadTable(getSelectedCategories());
         },
         error: function (error) {
@@ -27,6 +32,34 @@ $(document).ready(function () {
     $(document).on('change', '.category-checkbox', function () {
         loadTable(getSelectedCategories());
     });
+
+
+    //search categories
+    function initAutocomplete(categories) {
+        var categoryNames = categories.map(function (entry) {
+            return entry.name_category;
+        });
+
+        //autocomplete function is from jQuery UI 
+        $('#autocomplete').autocomplete({
+            source: categoryNames,
+            select: function (event, ui) {
+                var selectedCategory = ui.item.value;
+
+                //check the coresponding category from the menu
+                $('.category-checkbox').each(function () {
+                    var label = $(this).parent().text().trim();
+                    if (label === selectedCategory) {
+                        $(this).prop('checked', true).trigger('change');
+                    }
+                });
+
+                //colapse the ui
+                $('#autocomplete').val('');
+                return false;
+            }
+        });
+    }
 
    
     function getSelectedCategories() {
