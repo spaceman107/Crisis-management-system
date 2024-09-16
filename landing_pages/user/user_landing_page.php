@@ -16,6 +16,9 @@ include("../../../login/functions.php");
     <script src="new_request/fetch_data.js"></script>
     <script src="transaction_history/history.js"></script>
     <link rel="stylesheet" type="text/css" href="user.css" />
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 </head>
 
 <body>
