@@ -110,9 +110,8 @@ include("../../login/connection.php");
             <h2>Transactions Statistics Panel</h2>
             <div style="width: 700px;">
                 <canvas id="myChart"></canvas>
-           </div>
+            </div>
             <script type="text/javascript" src="transaction_statistics/transaction_Statistics_Chart.js"></script>
-            
             <label for="startMonth">Start Month:</label>
                 <select id="startMonth">
                     <option value="1">January</option>
@@ -151,7 +150,6 @@ include("../../login/connection.php");
                 <label for="endYear">End Year:</label>
                 <input type="text" id="endYear" placeholder="YYYY">
                 <button type="submit" onclick="fetchAndUpdateChart()">Update Chart</button>
-            
         </div>
         <div id="add-rescuer" class="panel">
             <h2>Add Rescuer Panel</h2>
@@ -202,12 +200,13 @@ include("../../login/connection.php");
         </div>
         <div id="create-announcement" class="panel">
             <h2>Create Announcement Panel</h2>
-           <form>
+            <form>
                 <label for="announcementText">Announcement Text:</label>
                 <textarea id="announcementText" name="announcementText" rows="5" cols="55"></textarea>
-                <label for="announcementProducts">Announcement Products:</label>
+                <label for="announcementProducts"><br>Announcement Products<br>(Give products ids separated with comma):</label>
                 <input type="text" id="announcementProducts" name="announcementProducts">
-                <button type="submit" onclick="submitAnnouncement()">Submit Announcement</button>
+                
+                <button type="button" onclick="submitAnnouncement()">Submit Announcement</button>
                 <script src="create_announcement/create_announcement.js"></script>
             </form>
         </div>
