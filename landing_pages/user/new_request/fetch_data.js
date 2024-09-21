@@ -34,7 +34,8 @@ $(document).ready(function () {
     });
 
 
-    //search categories
+    //search categories with autocomplete
+    //doesnt work perfectly with only 1 letter
     function initAutocomplete(categories) {
         var categoryNames = categories.map(function (entry) {
             return entry.name_category;
@@ -48,6 +49,7 @@ $(document).ready(function () {
 
                 //check the coresponding category from the menu
                 $('.category-checkbox').each(function () {
+                    //get the container and change is to checked
                     var label = $(this).parent().text().trim();
                     if (label === selectedCategory) {
                         $(this).prop('checked', true).trigger('change');
